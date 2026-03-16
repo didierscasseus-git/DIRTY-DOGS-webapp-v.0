@@ -91,6 +91,8 @@ function App() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="hero-content"
           >
+            <h1 className="hero-main-title">DIRTY DOGS</h1>
+            <p className="hero-sub-callout">RESTO-BAR MONTREAL</p>
             <div className="hero-cta-group">
               <button className="hero-cta-btn" onClick={() => setView('drink')}>
                 THE BAR
@@ -178,7 +180,7 @@ function App() {
       >
         <Nav transparent={false} setView={setView} />
         <div className="order-container">
-          <h2 className="order-title">SECURE THE BAG</h2>
+          <h1 className="order-title">SECURE THE BAG</h1>
           <p className="order-subtitle">CHOOSE YOUR DELIVERY PLATFORM</p>
           
           <div className="order-grid">
@@ -231,7 +233,7 @@ function App() {
         <Nav transparent={false} setView={setView} />
 
         <div style={{ textAlign: 'left', padding: '0 4rem', marginBottom: '4rem' }}>
-          <h2 style={{ fontSize: 'clamp(4rem, 10vw, 10rem)', lineHeight: '0.8', margin: '0' }}>{isFood ? 'THE CANTEEN' : 'THE BAR'}</h2>
+          <h1 style={{ fontSize: 'clamp(4rem, 10vw, 10rem)', lineHeight: '0.8', margin: '0' }}>{isFood ? 'THE CANTEEN' : 'THE BAR'}</h1>
           <p style={{ fontFamily: 'var(--font-sub)', fontSize: '1.2rem', letterSpacing: '4px', marginTop: '1rem', color: '#888', textTransform: 'uppercase' }}>
             {!isFood && 'COCKTAILS & CRAFT BEERS'}
           </p>
