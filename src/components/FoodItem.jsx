@@ -1,9 +1,9 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion as Motion } from 'framer-motion';
 
 const FoodItem = ({ item }) => {
     return (
-        <motion.div 
+        <Motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-20px" }}
@@ -18,7 +18,7 @@ const FoodItem = ({ item }) => {
                 <span className="industrial-item-price">${item.price.toFixed(2)}</span>
             </div>
             <p className="industrial-item-description">{item.description}</p>
-        </motion.div>
+        </Motion.div>
     );
 };
 

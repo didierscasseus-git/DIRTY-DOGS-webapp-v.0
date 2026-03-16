@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion as Motion, AnimatePresence } from 'framer-motion';
 import './index.css';
 import { menuData } from './data/menuData';
 import ShelfView from './components/ShelfView';
@@ -73,7 +73,7 @@ function App() {
     }
 
     return (
-      <motion.div 
+      <Motion.div 
         key="home"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -85,7 +85,7 @@ function App() {
 
         {/* Hero Section */}
         <section className="nostalgic-hero">
-          <motion.div 
+          <Motion.div 
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -101,14 +101,14 @@ function App() {
                 THE CANTEEN
               </button>
             </div>
-          </motion.div>
+          </Motion.div>
         </section>
 
         {/* Iconic Plates Section */}
         <section className="plates-section">
           <div className="plates-grid">
             {iconicPlates.map((plate, index) => (
-              <motion.div 
+              <Motion.div 
                 key={plate.id} 
                 className="plate-card"
                 initial={{ opacity: 0, y: 40 }}
@@ -117,19 +117,19 @@ function App() {
                 transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
               >
                 <div className="plate-image-container">
-                  <img src={plate.image || '/ASSETS/tacos plate.png'} alt={plate.name} />
+                  <img src={plate.image || '/assets/tacos plate.png'} alt={plate.name} />
                 </div>
                 <div className="plate-info">
                   <p className="plate-description">{plate.name} - {plate.description}</p>
                 </div>
-              </motion.div>
+              </Motion.div>
             ))}
           </div>
         </section>
 
         {/* Visit Us Section */}
         <section className="visit-section">
-          <div className="visit-banner" style={{ backgroundImage: "url('/ASSETS/Screenshot 2026-02-22 204246.png')" }}>
+          <div className="visit-banner" style={{ backgroundImage: "url('/assets/Screenshot 2026-02-22 204246.png')" }}>
             {/* The big sign image from the design */}
           </div>
           <div className="visit-details">
@@ -140,7 +140,7 @@ function App() {
                 <p>3685 Boul. Saint-Laurent,</p>
                 <p>Montreal, QC H2X 2V5</p>
 
-                <div className="map-placeholder" style={{ marginTop: '2rem', backgroundImage: "url('/ASSETS/map.png')", backgroundSize: 'cover' }}></div>
+                <div className="map-placeholder" style={{ marginTop: '2rem', backgroundImage: "url('/assets/map.png')", backgroundSize: 'cover' }}></div>
               </div>
               <div className="hours-container">
                 <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: '#fff' }}>HOURS</h3>
@@ -164,13 +164,13 @@ function App() {
             <div style={{ fontFamily: 'var(--font-header)', fontSize: '2rem' }}>DIRTY DOGS</div>
           </div>
         </footer>
-      </motion.div>
+      </Motion.div>
     );
   };
 
   const renderOrder = () => {
     return (
-      <motion.div 
+      <Motion.div 
         key="order"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -208,7 +208,7 @@ function App() {
             <p style={{ opacity: 0.5, fontSize: '0.8rem' }}>© {new Date().getFullYear()} Dirty Dogs Resto-Bar</p>
           </div>
         </footer>
-      </motion.div>
+      </Motion.div>
     );
   };
 
@@ -221,7 +221,7 @@ function App() {
       : Array.from(new Set(items.map(i => i.type)));
 
     return (
-      <motion.div 
+      <Motion.div 
         key="menu"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -280,7 +280,7 @@ function App() {
             </div>
           </div>
         </footer>
-      </motion.div>
+      </Motion.div>
     );
   };
 
@@ -291,7 +291,7 @@ function App() {
         {(view === 'food' || view === 'drink') && renderContent()}
         {view === 'order' && renderOrder()}
         {view === 'events' && (
-          <motion.div
+          <Motion.div
             key="events"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -300,7 +300,7 @@ function App() {
           >
             <Nav transparent={true} lightText={true} setView={setView} />
             <EventFeed />
-          </motion.div>
+          </Motion.div>
         )}
       </AnimatePresence>
       <SemanticShadow />

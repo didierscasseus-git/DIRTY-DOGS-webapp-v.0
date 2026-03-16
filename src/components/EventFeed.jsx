@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion as Motion } from 'framer-motion';
 import { eventData } from '../data/eventData';
 import '../index.css';
 
@@ -51,7 +51,7 @@ const EventFeed = () => {
         <main className="newsletter-main">
           {sortedEvents.length > 0 ? (
             sortedEvents.map((event) => (
-              <motion.article 
+              <Motion.article 
                 key={event.id} 
                 className={`newsletter-card ${event.isDynamicallyPast ? 'is-past' : ''}`}
                 initial={{ opacity: 0, y: 50, scale: 0.98 }}
@@ -78,7 +78,7 @@ const EventFeed = () => {
                   </a>
                 </div>
 
-              </motion.article>
+              </Motion.article>
             ))
           ) : (
             <div className="newsletter-empty">
