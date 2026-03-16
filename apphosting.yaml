@@ -1,0 +1,21 @@
+# Firebase App Hosting configuration file.
+# For more information, see https://firebase.google.com/docs/app-hosting/configure
+
+# The version of the apphosting.yaml schema.
+kind: "bundle"
+schemaVersion: "v1"
+
+# The command to start the application. 
+# Firebase App Hosting will automatically use "npm start" if not specified, 
+# but we'll be explicit here.
+runConfig:
+  cpu: 1
+  memoryMiB: 512
+  maxInstances: 2
+  minInstances: 0
+
+scripts:
+  # The build command is detected automatically, but can be overridden.
+  # build: "npm run build"
+  # The start command.
+  run: "npm run start"
