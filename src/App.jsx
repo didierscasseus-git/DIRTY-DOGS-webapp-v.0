@@ -184,12 +184,14 @@ function App() {
           <div className="order-grid">
             <a href="https://www.ubereats.com/ca-fr/store/dirty-dogs-st-laurent/F2U9RYCPUUKp6rfh7nt8ZQ?gad_source=1&gad_campaignid=22675284634&gbraid=0AAAAA_oynLRrnzMKa0gaXyU4fjXDPKxXi&gclid=CjwKCAjwyMnNBhBNEiwA-Kcgu9GR2UsSnkZJLAmpnX69SH0qwXGUs_Zu2NB_CivXD-0VcdvH1QeF5xoCUc4QAvD_BwE" 
                target="_blank" rel="noopener noreferrer" className="order-card uber">
-              <img src="/ASSETS/Uber_Eats_2020_logo.svg.png" alt="Uber Eats" className="order-card-img" />
+              <img src="/ubereats.svg" alt="Uber Eats" className="order-card-img" />
+              <div className="order-cta-btn">ORDER NOW</div>
             </a>
 
             <a href="https://www.doordash.com/en-CA/store/dirty-dogs-32295739/" 
                target="_blank" rel="noopener noreferrer" className="order-card doordash">
-              <img src="/ASSETS/doordash-logo-11609359542nd1g660y5t.webp" alt="DoorDash" className="order-card-img" />
+              <img src="/doordash.svg" alt="DoorDash" className="order-card-img" />
+              <div className="order-cta-btn">ORDER NOW</div>
             </a>
           </div>
 
