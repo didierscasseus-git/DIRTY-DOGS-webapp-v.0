@@ -60,16 +60,24 @@ h3 {
 
 /* Header/Nav Styles */
 .header-nav {
-  position: absolute;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  transition: background 0.3s ease;
   top: 0;
   width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 1.5rem 4rem;
-  gap: 2rem;
-  z-index: 1000;
+}
+
+.nav-transparent {
+  position: absolute;
   background: transparent;
+}
+
+.nav-dark {
+  position: fixed;
+  background: #000;
 }
 
 .nav-logo-small {
@@ -83,6 +91,11 @@ h3 {
   height: 100%;
   width: auto;
   object-fit: contain;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
 }
 
 .header-nav a {
@@ -110,6 +123,49 @@ h3 {
 .order-online-btn:hover {
   background: white;
   color: black;
+}
+
+/* Mobile Nav Styles */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 1001;
+}
+
+@media (max-width: 768px) {
+  .header-nav {
+    padding: 1rem 2rem;
+  }
+  
+  .nav-links {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 250px;
+    background: #000;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    border-left: 1px solid #333;
+    display: flex;
+  }
+  
+  .nav-links.active {
+    transform: translateX(0);
+  }
+  
+  .nav-toggle {
+    display: block;
+  }
 }
 
 /* Hero Styles */

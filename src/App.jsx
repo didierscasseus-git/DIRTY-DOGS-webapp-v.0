@@ -10,28 +10,33 @@ import FoodItem from './components/FoodItem';
 import EventFeed from './components/EventFeed';
 
 const Nav = ({ transparent = false, lightText = false, setView }) => {
+  const [isOpen, setIsOpen] = useState(false);
   const textColor = transparent && !lightText ? '#000' : '#fff';
+  
+  const handleNav = (v) => {
+    setView(v);
+    setIsOpen(false);
+  };
+
   return (
-    <nav className={`header-nav ${transparent ? 'nav-transparent' : 'nav-dark'}`} style={{
-      position: transparent ? 'absolute' : 'fixed',
-      background: transparent ? 'transparent' : '#000',
-      padding: '1rem 2rem',
-      justifyContent: 'flex-end',
-      top: 0,
-      width: '100%',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '2rem',
-      zIndex: 1000
-    }}>
-      <a href="#" className="nav-logo-small" onClick={(e) => { e.preventDefault(); setView('home'); }}>
+    <nav className={`header-nav ${transparent ? 'nav-transparent' : 'nav-dark'}`}>
+      <a href="#" className="nav-logo-small" onClick={(e) => { e.preventDefault(); handleNav('home'); }}>
         <img src="/logo_zoomed.png" alt="Dirty Dogs Logo" style={{ filter: transparent && !lightText ? 'invert(1)' : 'none' }} />
       </a>
-      <a href="#" onClick={(e) => { e.preventDefault(); setView('home'); }} style={{ color: textColor }}>HOME</a>
-      <a href="#" onClick={(e) => { e.preventDefault(); setView('food'); }} style={{ color: textColor }}>MENU</a>
-      <a href="#" onClick={(e) => { e.preventDefault(); setView('drink'); }} style={{ color: textColor }}>DRINKS</a>
-      <a href="#" onClick={(e) => { e.preventDefault(); setView('events'); }} style={{ color: textColor }}>EVENTS</a>
-      <a href="#" onClick={(e) => { e.preventDefault(); setView('order'); }} className="order-online-btn" style={{ borderColor: textColor, color: textColor }}>ORDER ONLINE</a>
+      
+      <button className="nav-toggle" onClick={() => setIsOpen(!isOpen)} style={{ color: textColor }}>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          {isOpen ? <path d="M18 6L6 18M6 6l12 12"/> : <path d="M3 12h18M3 6h18M3 18h18"/>}
+        </svg>
+      </button>
+
+      <div className={`nav-links ${isOpen ? 'active' : ''}`}>
+        <a href="#" onClick={(e) => { e.preventDefault(); handleNav('home'); }} style={{ color: textColor }}>HOME</a>
+        <a href="#" onClick={(e) => { e.preventDefault(); handleNav('food'); }} style={{ color: textColor }}>MENU</a>
+        <a href="#" onClick={(e) => { e.preventDefault(); handleNav('drink'); }} style={{ color: textColor }}>DRINKS</a>
+        <a href="#" onClick={(e) => { e.preventDefault(); handleNav('events'); }} style={{ color: textColor }}>EVENTS</a>
+        <a href="#" onClick={(e) => { e.preventDefault(); handleNav('order'); }} className="order-online-btn" style={{ borderColor: textColor, color: textColor }}>ORDER ONLINE</a>
+      </div>
     </nav>
   );
 };
@@ -171,7 +176,7 @@ function App() {
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className="order-view"
       >
-        <Nav transparent={false} />
+        <Nav transparent={false} setView={setView} />
         <div className="order-container">
           <h2 className="order-title">SECURE THE BAG</h2>
           <p className="order-subtitle">CHOOSE YOUR DELIVERY PLATFORM</p>
@@ -221,7 +226,7 @@ function App() {
         className="menu-view" 
         style={{ paddingTop: '8rem', background: '#000', color: '#fff', minHeight: '100vh' }}
       >
-        <Nav transparent={false} />
+        <Nav transparent={false} setView={setView} />
 
         <div style={{ textAlign: 'left', padding: '0 4rem', marginBottom: '4rem' }}>
           <h2 style={{ fontSize: 'clamp(4rem, 10vw, 10rem)', lineHeight: '0.8', margin: '0' }}>{isFood ? 'THE CANTEEN' : 'THE BAR'}</h2>
