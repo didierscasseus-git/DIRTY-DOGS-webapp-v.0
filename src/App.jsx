@@ -91,8 +91,7 @@ function App() {
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             className="hero-content"
           >
-            <h1 className="hero-main-title">DIRTY DOGS</h1>
-            <p className="hero-sub-callout">RESTO-BAR MONTREAL</p>
+            <h1 className="visually-hidden">DIRTY DOGS RESTO-BAR MONTREAL</h1>
             <div className="hero-cta-group">
               <button className="hero-cta-btn" onClick={() => setView('drink')}>
                 THE BAR
