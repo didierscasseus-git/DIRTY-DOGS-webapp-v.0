@@ -25,3 +25,17 @@ dist-ssr
 
 # Local Project Folders
 /fortuna/
+
+# Firebase
+.firebase/
+firebase-debug.log*
+ui-debug.log*
+
+# Antigravity/Agent artifacts
+.gemini/
+.agents/
+.agent/
+_agents/
+_agent/
+brain/
+tmp/

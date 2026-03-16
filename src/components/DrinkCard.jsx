@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 
 const DrinkCard = ({ item }) => {
     const isSangria = item.type === 'Sangrias';
@@ -6,7 +7,14 @@ const DrinkCard = ({ item }) => {
     const ingredients = item.ingredients || [];
 
     return (
-        <div className="drink-card" style={{ padding: '2rem' }}>
+        <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="drink-card" 
+            style={{ padding: '2rem' }}
+        >
             <div className="drink-card-header" style={{ marginBottom: '2rem' }}>
                 <h3 className="drink-card-title">{item.name}{isSangria ? ' PITCHER' : ''}</h3>
                 <div className="drink-card-meta">
@@ -37,7 +45,7 @@ const DrinkCard = ({ item }) => {
                 <h4 className="drink-card-section-title">FLAVOR PROFILE</h4>
                 <p className="flavor-profile" style={{ marginTop: '0.5rem', lineHeight: '1.4' }}>{item.description}</p>
             </div>
-        </div>
+        </motion.div>
     );
 };
 

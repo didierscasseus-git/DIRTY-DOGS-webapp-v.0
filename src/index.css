@@ -136,9 +136,9 @@ h3 {
   width: 100%;
   height: 100%;
   background: linear-gradient(to bottom,
-      rgba(255, 255, 255, 0.2) 0%,
-      rgba(255, 255, 255, 0.1) 70%,
-      rgba(0, 0, 0, 0.6) 100%);
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0) 50%,
+      rgba(0, 0, 0, 0.8) 100%);
   z-index: 1;
 }
 
@@ -558,72 +558,222 @@ footer {
 .order-card {
   background: #111;
   border: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 3rem 2rem;
   text-decoration: none;
-  color: #fff;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 1.5rem;
+  justify-content: center;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
+  height: 250px;
+  border-radius: 8px;
 }
 
-.order-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
+.order-card.uber {
+  background: white;
+}
+
+.order-card.doordash {
+  background: #FF3008;
+}
+
+.order-card-img {
   width: 100%;
-  height: 4px;
-  background: transparent;
-  transition: background-color 0.3s ease;
+  height: 100%;
+  object-fit: contain;
+  padding: 2rem;
+  transition: transform 0.3s ease;
 }
-
-.order-card.uber:hover::before { background: #06C167; }
-.order-card.doordash:hover::before { background: #FF3008; }
 
 .order-card:hover {
   transform: translateY(-8px);
-  background: #181818;
   box-shadow: 0 20px 40px rgba(0,0,0,0.5);
   border-color: rgba(255, 255, 255, 0.3);
 }
 
-.order-card-icon svg {
-  width: 60px;
-  height: 60px;
-  opacity: 0.5;
-  transition: opacity 0.3s ease;
-}
-
-.order-card:hover .order-card-icon svg {
-  opacity: 1;
-}
-
-.order-card h3 {
-  font-size: 2.5rem;
-  margin: 0;
-}
-
-.order-btn-label {
-  font-family: var(--font-sub);
-  font-size: 0.9rem;
-  letter-spacing: 2px;
-  padding: 0.5rem 1rem;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  transition: all 0.3s ease;
-}
-
-.order-card:hover .order-btn-label {
-  background: #fff;
-  color: #000;
-  border-color: #fff;
+.order-card:hover .order-card-img {
+  transform: scale(1.05);
 }
 
 @media (max-width: 768px) {
   .order-grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* --- Newsletter Event Feed Styles (Apple Style) --- */
+
+.newsletter-wrapper {
+  background-color: var(--color-bg);
+  min-height: 100vh;
+  padding-top: 100px; /* Space for the fixed nav */
+  padding-bottom: 80px;
+  color: #fff;
+}
+
+.newsletter-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.newsletter-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.newsletter-title {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.newsletter-subtitle {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1.25rem;
+  color: #888;
+  font-weight: 400;
+}
+
+.newsletter-main {
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+}
+
+.newsletter-card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.newsletter-card:last-child {
+  border-bottom: none;
+}
+
+.newsletter-card.is-past {
+  opacity: 0.6;
+}
+
+.newsletter-text-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.newsletter-kicker {
+  color: #FF2D55; /* Apple Mail style accent color, or could be a subtler grey */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.newsletter-heading {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.newsletter-description {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: #ccc;
+  margin-top: 0.5rem;
+}
+
+.newsletter-location {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 0.95rem;
+  color: #888;
+  font-weight: 500;
+}
+
+.newsletter-image-container {
+  position: relative;
+  width: 100%;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.newsletter-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.newsletter-badge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-color: rgba(0,0,0,0.7);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.newsletter-actions {
+  margin-top: 1rem;
+}
+
+.apple-pill-btn {
+  display: inline-block;
+  background-color: #fff;
+  color: #000;
+  padding: 12px 28px;
+  border-radius: 9999px; /* Pill shape */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.apple-pill-btn:hover {
+  transform: scale(1.02);
+  background-color: #f0f0f0;
+}
+
+.newsletter-card.is-past .apple-pill-btn {
+  background-color: rgba(255,255,255,0.1);
+  color: #fff;
+}
+
+.newsletter-card.is-past .apple-pill-btn:hover {
+  background-color: rgba(255,255,255,0.2);
+}
+
+.newsletter-empty {
+  text-align: center;
+  padding: 6rem 0;
+  color: #888;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.newsletter-footer {
+  text-align: center;
+  margin-top: 6rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  color: #666;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 0.9rem;
 }
