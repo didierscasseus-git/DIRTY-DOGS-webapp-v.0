@@ -8,6 +8,7 @@ import DeliverySection from './components/DeliverySection';
 import DrinkCard from './components/DrinkCard';
 import FoodItem from './components/FoodItem';
 import EventFeed from './components/EventFeed';
+import SemanticShadow from './components/SemanticShadow';
 
 const Nav = ({ transparent = false, lightText = false, setView }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -302,6 +303,7 @@ function App() {
           </motion.div>
         )}
       </AnimatePresence>
+      <SemanticShadow />
 
       <style>{`
         .app-root {
