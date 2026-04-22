@@ -6,7 +6,7 @@ export const eventData = [
     dateIso: "2026-03-14T12:00:00",
     location: "Dirty Dogs - All Saint-Laurent Bars",
     description: "Featuring ZAMA. Mad City Bar Fest Presents Get Lucky.",
-    image: "/assets/events/645510719_17999090159856715_8651581318720944627_n.jpg",
+    image: "/ASSETS/events/645510719_17999090159856715_8651581318720944627_n.jpg",
     isPast: false,
     link: "https://madcitybarfest.com"
   },
@@ -17,7 +17,7 @@ export const eventData = [
     dateIso: "2026-02-28T22:00:00",
     location: "Dirty Dogs St-Laurent",
     description: "The Best Latin & Hip-Hop Hits from 2016. Music by DJ Adrian & DJ Brayy.",
-    image: "/assets/events/641365807_18567572224031100_1573128460517355460_n.jpg",
+    image: "/ASSETS/events/641365807_18567572224031100_1573128460517355460_n.jpg",
     isPast: true,
     link: "#"
   },
@@ -28,7 +28,7 @@ export const eventData = [
     dateIso: "2025-12-18T22:00:00",
     location: "Dirty Dogs St-Laurent",
     description: "Thank you all for this year! Gift shots during the night. Music by Fibonacci.",
-    image: "/assets/events/590429859_18352290259202201_4993699033010452538_n.jpg",
+    image: "/ASSETS/events/590429859_18352290259202201_4993699033010452538_n.jpg",
     isPast: true,
     link: "#"
   },
@@ -39,7 +39,7 @@ export const eventData = [
     dateIso: "2025-12-05T22:00:00",
     location: "Dirty Dogs St-Laurent",
     description: "DJ Alejandro Fibonacci",
-    image: "/assets/events/589207298_18543265663044083_6160416879342676655_n.jpg",
+    image: "/ASSETS/events/589207298_18543265663044083_6160416879342676655_n.jpg",
     isPast: true,
     link: "#"
   },
@@ -50,7 +50,7 @@ export const eventData = [
     dateIso: "2025-10-30T22:00:00",
     location: "Dirty Dogs St-Laurent",
     description: "Dirty Thursdays. Music by DJ Brayy & Ed Winter. Specials: 100$ Bottles, 10$ Cocktails.",
-    image: "/assets/events/572767165_18535045114044083_767069287242182181_n.jpg",
+    image: "/ASSETS/events/572767165_18535045114044083_767069287242182181_n.jpg",
     isPast: true,
     link: "#"
   },
@@ -61,7 +61,7 @@ export const eventData = [
     dateIso: "2025-10-31T22:00:00",
     location: "Dirty Dogs St-Laurent",
     description: "Friday: DJ Nanazen & Ed Winter. Saturday: La Nueva Ley & DJ Ed Winter.",
-    image: "/assets/events/572148401_18535224511044083_174848916680398038_n.jpg",
+    image: "/ASSETS/events/572148401_18535224511044083_174848916680398038_n.jpg",
     isPast: true,
     link: "#"
   },
@@ -72,7 +72,7 @@ export const eventData = [
     dateIso: "2025-10-24T22:00:00",
     location: "Dirty Dogs St-Laurent",
     description: "Music By Alejandro Fibonacci & Ed Winter.",
-    image: "/assets/events/568535000_18533764912044083_9119837015829946581_n.jpg",
+    image: "/ASSETS/events/568535000_18533764912044083_9119837015829946581_n.jpg",
     isPast: true,
     link: "#"
   },
@@ -83,7 +83,7 @@ export const eventData = [
     dateIso: "2025-10-17T22:00:00",
     location: "Dirty Dogs St-Laurent",
     description: "Rodrigo's B-Day Weekend. Fibonacci / Edwinter.",
-    image: "/assets/events/564847052_18532354006044083_2989053003809739_n.jpg",
+    image: "/ASSETS/events/564847052_18532354006044083_2989053003809739_n.jpg",
     isPast: true,
     link: "#"
   }

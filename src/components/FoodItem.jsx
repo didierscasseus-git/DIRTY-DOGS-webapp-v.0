@@ -1,24 +1,21 @@
 import React from 'react';
-import { motion as Motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const FoodItem = ({ item }) => {
     return (
-        <Motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-20px" }}
-            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-            className="industrial-item-container"
+        <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="food-list-item glass-card"
+            style={{ padding: '1rem 1.5rem', marginBottom: '0.8rem', border: '1px solid var(--glass-border)' }}
         >
-            <div className="industrial-item">
-                <div className="industrial-item-main">
-                    <span className="industrial-item-name">{item.name}</span>
-                    <div className="industrial-item-dots"></div>
-                </div>
-                <span className="industrial-item-price">${item.price.toFixed(2)}</span>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: '0.3rem' }}>
+                <span style={{ fontFamily: 'var(--font-header)', fontSize: '1.4rem', color: 'white' }}>{item.name}</span>
+                <span style={{ fontFamily: 'var(--font-header)', fontSize: '1.2rem', color: 'var(--color-action)' }}>${item.price}</span>
             </div>
-            <p className="industrial-item-description">{item.description}</p>
-        </Motion.div>
+            <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.6)', lineHeight: '1.4' }}>{item.description}</p>
+        </motion.div>
     );
 };
 

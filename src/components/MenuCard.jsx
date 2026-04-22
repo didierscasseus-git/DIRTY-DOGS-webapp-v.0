@@ -58,18 +58,20 @@ const MenuCard = ({ item }) => {
 
       <style>{`
         .menu-card {
-          min-width: 300px;
-          background: var(--color-shelf-white);
-          border: var(--border-thick);
+          width: 100%;
+          max-width: 400px;
+          background: #FFFFFF;
+          border-radius: var(--border-radius-md);
+          border: 1px solid var(--color-divider);
           padding: 1.5rem;
           display: flex;
           flex-direction: column;
-          gap: 1rem;
+          gap: 1.5rem;
           position: relative;
-          transition: transform 0.2s;
-          box-shadow: 10px 10px 0px var(--color-text-dark);
-          margin-bottom: 20px;
-          margin-right: 20px;
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+          margin-bottom: 2rem;
+          overflow: hidden;
         }
 
         .menu-card:hover {

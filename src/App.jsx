@@ -1,146 +1,171 @@
 import React, { useState } from 'react';
-import { motion as Motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { 
+  Menu as MenuIcon, 
+  MapPin, 
+  Calendar, 
+  Clock, 
+  ArrowRight, 
+  ShoppingBag,
+  Info,
+  Utensils,
+  Beer,
+  Globe,
+  MessageCircle
+} from 'lucide-react';
 import './index.css';
 import { menuData } from './data/menuData';
+
+const SocialIcons = () => (
+  <div style={{ display: 'flex', gap: '1rem' }}>
+    <a href="#" className="social-icon-link" style={{ color: 'white', opacity: 0.6 }}><Globe size={20} /></a>
+    <a href="#" className="social-icon-link" style={{ color: 'white', opacity: 0.6 }}><MessageCircle size={20} /></a>
+  </div>
+);
 import ShelfView from './components/ShelfView';
 import ComboCard from './components/ComboCard';
 import DeliverySection from './components/DeliverySection';
 import DrinkCard from './components/DrinkCard';
 import FoodItem from './components/FoodItem';
 import EventFeed from './components/EventFeed';
-import SemanticShadow from './components/SemanticShadow';
 
-const Nav = ({ transparent = false, lightText = false, setView }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const textColor = transparent && !lightText ? '#000' : '#fff';
-  
-  const handleNav = (v) => {
-    setView(v);
-    setIsOpen(false);
-  };
-
+const Nav = ({ setView }) => {
   return (
-    <nav className={`header-nav ${transparent ? 'nav-transparent' : 'nav-dark'}`}>
-      <a href="#" className="nav-logo-small" onClick={(e) => { e.preventDefault(); handleNav('home'); }}>
-        <img src="/logo_zoomed.png" alt="Dirty Dogs Logo" style={{ filter: transparent && !lightText ? 'invert(1)' : 'none' }} />
-      </a>
-      
-      <button className="nav-toggle" onClick={() => setIsOpen(!isOpen)} style={{ color: textColor }}>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          {isOpen ? <path d="M18 6L6 18M6 6l12 12"/> : <path d="M3 12h18M3 6h18M3 18h18"/>}
-        </svg>
-      </button>
-
-      <div className={`nav-links ${isOpen ? 'active' : ''}`}>
-        <a href="#" onClick={(e) => { e.preventDefault(); handleNav('home'); }} style={{ color: textColor }}>HOME</a>
-        <a href="#" onClick={(e) => { e.preventDefault(); handleNav('food'); }} style={{ color: textColor }}>MENU</a>
-        <a href="#" onClick={(e) => { e.preventDefault(); handleNav('drink'); }} style={{ color: textColor }}>DRINKS</a>
-        <a href="#" onClick={(e) => { e.preventDefault(); handleNav('events'); }} style={{ color: textColor }}>EVENTS</a>
-        <a href="#" onClick={(e) => { e.preventDefault(); handleNav('order'); }} className="order-online-btn" style={{ borderColor: textColor, color: textColor }}>ORDER ONLINE</a>
+    <nav className="header-nav">
+      <div className="nav-logo-small" onClick={() => setView('home')} style={{ cursor: 'pointer' }}>
+        <img src="/logo_zoomed.png" alt="Logo" style={{ height: '30px' }} />
+      </div>
+      <div className="nav-actions">
+        <button onClick={() => setView('food')} className="nav-icon-btn"><Utensils size={20} /></button>
+        <button onClick={() => setView('drink')} className="nav-icon-btn"><Beer size={20} /></button>
+        <button onClick={() => setView('events')} className="nav-icon-btn"><Calendar size={20} /></button>
       </div>
     </nav>
   );
 };
 
-const SocialIcons = () => (
-  <div className="social-icons">
-    <a href="#" aria-label="Facebook">
-      <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3V2z" /></svg>
-    </a>
-    <a href="https://www.instagram.com/eatdirtydogs/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-      <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5zm10.5 4a1.5 1.5 0 100 3 1.5 1.5 0 000-3zM12 7a5 5 0 100 10 5 5 0 000-10zm0 2a3 3 0 110 6 3 3 0 010-6z" /></svg>
-    </a>
-    <a href="#" aria-label="Twitter">
-      <svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" /></svg>
-    </a>
-  </div>
-);
+const springTransition = {
+  type: "spring",
+  stiffness: 100,
+  damping: 20,
+  mass: 1
+};
+
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2
+    }
+  }
+};
+
+const itemVariant = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: springTransition }
+};
 
 function App() {
-  const [view, setView] = useState('home'); // 'home', 'food', 'drink', 'order'
+  const [view, setView] = useState('home');
 
   const renderHome = () => {
-    // Take specific food items as "Iconic Plates"
     const iconicPlateIds = ['b1', 'b2', 'p5', 'p1'];
     const iconicPlates = iconicPlateIds.map(id => menuData.food.find(item => item.id === id)).filter(Boolean);
 
-    // Fallback if less than 4 items
-    if (iconicPlates.length < 4) {
-      const moreItems = menuData.food.filter(item => !iconicPlateIds.includes(item.id));
-      while (iconicPlates.length < 4 && moreItems.length > 0) {
-        iconicPlates.push(moreItems.shift());
-      }
-    }
-
     return (
-      <Motion.div 
+      <motion.div 
         key="home"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.6 }}
         className="home-container"
       >
-        <Nav transparent={true} setView={setView} />
+        <Nav setView={setView} />
 
         {/* Hero Section */}
         <section className="nostalgic-hero">
-          <Motion.div 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="hero-content"
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ ...springTransition, delay: 0.2 }}
+            className="hero-content glass-card"
           >
-            <h1 className="visually-hidden">DIRTY DOGS RESTO-BAR MONTREAL</h1>
+            {/* Title removed per user request */}
+            {/* Subtitle removed per user request */}
             <div className="hero-cta-group">
-              <button className="hero-cta-btn" onClick={() => setView('drink')}>
-                THE BAR
-              </button>
-              <button className="hero-cta-btn" onClick={() => setView('food')}>
-                THE CANTEEN
-              </button>
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="hero-cta-btn" 
+                style={{ borderRadius: '20px', fontSize: '1.2rem', padding: '1rem 2rem' }}
+                onClick={() => setView('food')}
+              >
+                <ShoppingBag size={20} style={{ marginRight: '8px' }} />
+                ORDER NOW
+              </motion.button>
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="hero-cta-btn" 
+                style={{ borderRadius: '20px', fontSize: '1.2rem', padding: '1rem 2rem' }}
+                onClick={() => setView('events')}
+              >
+                <Info size={20} style={{ marginRight: '8px' }} />
+                EVENTS
+              </motion.button>
             </div>
-          </Motion.div>
+          </motion.div>
         </section>
 
         {/* Iconic Plates Section */}
         <section className="plates-section">
-          <div className="plates-grid">
-            {iconicPlates.map((plate, index) => (
-              <Motion.div 
+          <motion.div 
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-100px" }}
+            className="plates-grid"
+          >
+            {iconicPlates.map((plate) => (
+              <motion.div 
                 key={plate.id} 
-                className="plate-card"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="plate-card glass-card"
+                variants={itemVariant}
               >
                 <div className="plate-image-container">
-                  <img src={plate.image || '/assets/tacos plate.png'} alt={plate.name} />
+                  <img src={plate.image || '/ASSETS/tacos plate.png'} alt={plate.name} />
                 </div>
                 <div className="plate-info">
-                  <p className="plate-description">{plate.name} - {plate.description}</p>
+                   <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{plate.name}</h3>
+                   <p className="plate-description" style={{ fontSize: '0.9rem', color: 'rgba(255,255,255,0.7)' }}>{plate.description}</p>
                 </div>
-              </Motion.div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </section>
 
         {/* Visit Us Section */}
         <section className="visit-section">
-          <div className="visit-banner" style={{ backgroundImage: "url('/assets/Screenshot 2026-02-22 204246.png')" }}>
-            {/* The big sign image from the design */}
-          </div>
+          <div className="visit-banner" style={{ backgroundImage: "url('/ASSETS/Screenshot 2026-02-22 204246.png')" }}></div>
           <div className="visit-details">
-            <h2 style={{ fontSize: '4rem' }}>VISIT US AT THE CORNER</h2>
+            <motion.h2 
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={springTransition}
+              style={{ fontSize: '4rem' }}
+            >
+              VISIT US AT THE CORNER
+            </motion.h2>
             <div className="visit-info-grid">
               <div className="address-container">
                 <p style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>Dirty Dogs Resto-Bar</p>
                 <p>3685 Boul. Saint-Laurent,</p>
                 <p>Montreal, QC H2X 2V5</p>
 
-                <div className="map-placeholder" style={{ marginTop: '2rem', backgroundImage: "url('/assets/map.png')", backgroundSize: 'cover' }}></div>
+                <div className="map-placeholder" style={{ marginTop: '2rem', backgroundImage: "url('/ASSETS/map.png')", backgroundSize: 'cover' }}></div>
               </div>
               <div className="hours-container">
                 <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: '#fff' }}>HOURS</h3>
@@ -148,14 +173,11 @@ function App() {
                 <p style={{ opacity: 0.8 }}>Thu – Sat: 12:00 PM - 3:00 AM</p>
                 <p style={{ opacity: 0.8 }}>Sun: 12:00 PM - 1:00 AM</p>
               </div>
-              <div style={{ marginTop: '2rem' }}>
-                <p style={{ opacity: 0.6, fontSize: '0.9rem' }}>Dine-in, Takeout & Delivery available via Uber Eats & DoorDash.</p>
-              </div>
             </div>
           </div>
         </section>
 
-        <footer style={{ background: '#000' }}>
+        <footer className="view-footer">
           <div>
             <p style={{ opacity: 0.5, fontSize: '0.8rem' }}>© Copyright Dirty Dogs, LLC</p>
           </div>
@@ -164,13 +186,13 @@ function App() {
             <div style={{ fontFamily: 'var(--font-header)', fontSize: '2rem' }}>DIRTY DOGS</div>
           </div>
         </footer>
-      </Motion.div>
+      </motion.div>
     );
   };
 
   const renderOrder = () => {
     return (
-      <Motion.div 
+      <motion.div 
         key="order"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -178,22 +200,20 @@ function App() {
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className="order-view"
       >
-        <Nav transparent={false} setView={setView} />
+        <Nav setView={setView} />
         <div className="order-container">
-          <h1 className="order-title">SECURE THE BAG</h1>
+          <h2 className="order-title">SECURE THE BAG</h2>
           <p className="order-subtitle">CHOOSE YOUR DELIVERY PLATFORM</p>
           
           <div className="order-grid">
             <a href="https://www.ubereats.com/ca-fr/store/dirty-dogs-st-laurent/F2U9RYCPUUKp6rfh7nt8ZQ?gad_source=1&gad_campaignid=22675284634&gbraid=0AAAAA_oynLRrnzMKa0gaXyU4fjXDPKxXi&gclid=CjwKCAjwyMnNBhBNEiwA-Kcgu9GR2UsSnkZJLAmpnX69SH0qwXGUs_Zu2NB_CivXD-0VcdvH1QeF5xoCUc4QAvD_BwE" 
                target="_blank" rel="noopener noreferrer" className="order-card uber">
-              <img src="/ubereats.svg" alt="Uber Eats" className="order-card-img" />
-              <div className="order-cta-btn">ORDER NOW</div>
+              <img src="/ASSETS/Uber_Eats_2020_logo.svg.png" alt="Uber Eats" className="order-card-img" />
             </a>
 
             <a href="https://www.doordash.com/en-CA/store/dirty-dogs-32295739/" 
                target="_blank" rel="noopener noreferrer" className="order-card doordash">
-              <img src="/doordash.svg" alt="DoorDash" className="order-card-img" />
-              <div className="order-cta-btn">ORDER NOW</div>
+              <img src="/ASSETS/doordash-logo-11609359542nd1g660y5t.webp" alt="DoorDash" className="order-card-img" />
             </a>
           </div>
 
@@ -208,7 +228,7 @@ function App() {
             <p style={{ opacity: 0.5, fontSize: '0.8rem' }}>© {new Date().getFullYear()} Dirty Dogs Resto-Bar</p>
           </div>
         </footer>
-      </Motion.div>
+      </motion.div>
     );
   };
 
@@ -221,7 +241,7 @@ function App() {
       : Array.from(new Set(items.map(i => i.type)));
 
     return (
-      <Motion.div 
+      <motion.div 
         key="menu"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -230,10 +250,10 @@ function App() {
         className="menu-view" 
         style={{ paddingTop: '8rem', background: '#000', color: '#fff', minHeight: '100vh' }}
       >
-        <Nav transparent={false} setView={setView} />
+        <Nav setView={setView} />
 
-        <div style={{ textAlign: 'left', padding: '0 4rem', marginBottom: '4rem' }}>
-          <h1 style={{ fontSize: 'clamp(4rem, 10vw, 10rem)', lineHeight: '0.8', margin: '0' }}>{isFood ? 'THE CANTEEN' : 'THE BAR'}</h1>
+        <div className="view-header">
+          <h2 style={{ fontSize: 'clamp(4rem, 10vw, 10rem)', lineHeight: '0.8', margin: '0' }}>{isFood ? 'THE CANTEEN' : 'THE BAR'}</h2>
           <p style={{ fontFamily: 'var(--font-sub)', fontSize: '1.2rem', letterSpacing: '4px', marginTop: '1rem', color: '#888', textTransform: 'uppercase' }}>
             {!isFood && 'COCKTAILS & CRAFT BEERS'}
           </p>
@@ -280,7 +300,7 @@ function App() {
             </div>
           </div>
         </footer>
-      </Motion.div>
+      </motion.div>
     );
   };
 
@@ -291,7 +311,7 @@ function App() {
         {(view === 'food' || view === 'drink') && renderContent()}
         {view === 'order' && renderOrder()}
         {view === 'events' && (
-          <Motion.div
+          <motion.div
             key="events"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -300,10 +320,9 @@ function App() {
           >
             <Nav transparent={true} lightText={true} setView={setView} />
             <EventFeed />
-          </Motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
-      <SemanticShadow />
 
       <style>{`
         .app-root {

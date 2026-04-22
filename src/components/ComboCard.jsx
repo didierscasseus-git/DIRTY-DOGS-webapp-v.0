@@ -81,8 +81,9 @@ const ComboCard = ({ combo }) => {
         }
 
         .combo-add-btn {
-          padding: 0.8rem 1.5rem;
+          padding: 1rem 1.5rem;
           font-size: 1.2rem;
+          min-height: 48px;
         }
       `}</style>
     </div>

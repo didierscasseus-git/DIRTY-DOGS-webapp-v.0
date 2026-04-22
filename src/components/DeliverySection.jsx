@@ -27,64 +27,68 @@ const DeliverySection = () => {
 
       <style>{`
         .delivery-section {
-          margin-top: 4rem;
-          padding: 2rem;
+          margin-top: 6rem;
+          padding: 2rem calc(2rem + env(safe-area-inset-right)) 2rem calc(2rem + env(safe-area-inset-left));
           text-align: center;
           width: 100%;
-          max-width: 1000px;
+          max-width: 1200px;
+          margin-left: auto;
+          margin-right: auto;
         }
 
         .delivery-title {
           font-family: var(--font-header);
-          font-size: 3rem;
+          font-size: clamp(2.5rem, 10vw, 4rem);
           margin-bottom: 3rem;
           color: var(--color-text-dark);
+          letter-spacing: -1px;
         }
 
         .delivery-partners {
           display: flex;
           justify-content: center;
-          gap: 3rem;
+          gap: 2rem;
           flex-wrap: wrap;
         }
 
         .partner-btn {
           text-decoration: none;
-          background: white;
-          border: var(--border-thick);
-          padding: 1.5rem 2rem;
+          background: #FFFFFF;
+          border-radius: var(--border-radius-md);
+          border: 1px solid var(--color-divider);
+          padding: 1.2rem 2.5rem;
           color: var(--color-text-dark);
-          font-family: var(--font-header);
-          font-size: 1.5rem;
-          transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+          font-family: var(--font-sub);
+          font-weight: 700;
+          font-size: 1.2rem;
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
           position: relative;
-          min-width: 200px;
-          box-shadow: 6px 6px 0px var(--partner-color);
+          min-width: 220px;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          overflow: hidden;
+        }
+
+        .partner-btn::before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 4px;
+          background: var(--partner-color);
+          opacity: 0.8;
         }
 
         .partner-btn:hover {
-          transform: translateY(-2px);
-          box-shadow: 8px 8px 0px var(--partner-color);
+          transform: translateY(-4px);
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
 
         .partner-btn:active {
-          transform: translateY(2px);
-          box-shadow: 2px 2px 0px var(--partner-color);
-        }
-
-        .partner-name {
-          position: relative;
-          z-index: 2;
-        }
-
-        @media (max-width: 768px) {
-          .delivery-partners {
-            gap: 1.5rem;
-          }
-          .partner-btn {
-            width: 100%;
-            max-width: 300px;
-          }
+          transform: scale(0.96);
         }
       `}</style>
     </div>
