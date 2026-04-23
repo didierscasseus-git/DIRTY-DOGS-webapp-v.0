@@ -29,9 +29,9 @@ import DrinkCard from './components/DrinkCard';
 import FoodItem from './components/FoodItem';
 import EventFeed from './components/EventFeed';
 
-const Nav = ({ setView }) => {
+const Nav = ({ setView, transparent, lightText }) => {
   return (
-    <nav className="header-nav">
+    <nav className={`header-nav ${transparent ? 'is-transparent' : ''} ${lightText ? 'is-light' : ''}`}>
       <div className="nav-logo-small" onClick={() => setView('home')} style={{ cursor: 'pointer' }}>
         <img src="/logo_zoomed.png" alt="Logo" style={{ height: '30px' }} />
       </div>
@@ -136,7 +136,7 @@ function App() {
                 variants={itemVariant}
               >
                 <div className="plate-image-container">
-                  <img src={plate.image || '/assets/tacos plate.png'} alt={plate.name} />
+                  <img src={plate.image || '/assets/tacos-plate.png'} alt={plate.name} />
                 </div>
                 <div className="plate-info">
                    <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{plate.name}</h3>
@@ -149,7 +149,7 @@ function App() {
 
         {/* Visit Us Section */}
         <section className="visit-section">
-          <div className="visit-banner" style={{ backgroundImage: "url('/assets/Screenshot 2026-02-22 204246.png')" }}></div>
+          <div className="visit-banner" style={{ backgroundImage: "url('/assets/visit-banner.png')" }}></div>
           <div className="visit-details">
             <motion.h2 
               initial={{ opacity: 0, x: -20 }}

@@ -1,9 +1,9 @@
 export const menuData = {
     food: [
         // Dirty Tacos (3 for $21. Served on fresh local artisan corn tortillas)
-        { id: 't1', name: 'Tacos de Mama', price: 21, description: '3 Tacos. 6-hour slow-cooked pulled beef, homemade pico de gallo, pickled onions, mama’s secret garlic sauce. Served on fresh local artisan corn tortillas.', category: 'Dirty Tacos (3 for $21)', image: '/assets/tacos plate.png' },
-        { id: 't2', name: 'Mango Shrimp Tacos', price: 21, description: '3 Tacos. Shrimp marinated in fresh mango salsa, homemade pico de gallo, pickled onions, mama’s secret garlic sauce. Served on fresh local artisan corn tortillas.', category: 'Dirty Tacos (3 for $21)', image: '/assets/tacos plate.png' },
-        { id: 't3', name: 'Tacos Carnitas', price: 21, description: '3 Tacos. 8-hour slow-cooked pulled pork, homemade pico de gallo, pickled onions, tangy jalapeno salsa. Served on fresh local artisan corn tortillas.', category: 'Dirty Tacos (3 for $21)', image: '/assets/tacos plate.png' },
+        { id: 't1', name: 'Tacos de Mama', price: 21, description: '3 Tacos. 6-hour slow-cooked pulled beef, homemade pico de gallo, pickled onions, mama’s secret garlic sauce. Served on fresh local artisan corn tortillas.', category: 'Dirty Tacos (3 for $21)', image: '/assets/tacos-plate.png' },
+        { id: 't2', name: 'Mango Shrimp Tacos', price: 21, description: '3 Tacos. Shrimp marinated in fresh mango salsa, homemade pico de gallo, pickled onions, mama’s secret garlic sauce. Served on fresh local artisan corn tortillas.', category: 'Dirty Tacos (3 for $21)', image: '/assets/tacos-plate.png' },
+        { id: 't3', name: 'Tacos Carnitas', price: 21, description: '3 Tacos. 8-hour slow-cooked pulled pork, homemade pico de gallo, pickled onions, tangy jalapeno salsa. Served on fresh local artisan corn tortillas.', category: 'Dirty Tacos (3 for $21)', image: '/assets/tacos-plate.png' },
 
         // Dirty Grinottes (Appetizers)
         { id: 'a1', name: 'Chips n Guac', price: 13, description: 'Crispy corn tortilla chips, guacamole, homemade pico de gallo.', category: 'Dirty Grinottes (Appetizers)', image: '/assets/plate2.png' },
