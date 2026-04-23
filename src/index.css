@@ -442,13 +442,35 @@ h3 {
     padding: 1.2rem !important;
     font-size: 1.2rem !important;
   }
-  
+
+  /* Remove the container box — buttons float freely, stacked and separated */
   .hero-cta-group {
     width: 100%;
-    padding: 0 2rem;
-    gap: 1rem;
+    padding: 0;
+    gap: 0;
+    background: none !important;
+    backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-cta-group .hero-cta-btn:first-child {
+    margin-bottom: 2.5rem;
+  }
+
+  /* Strip the glass card container on mobile so buttons aren't boxed in */
+  .hero-content.glass-card {
+    background: transparent !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 1.5rem !important;
   }
 }
+
 
 .plates-section-title {
   font-size: 4rem;
