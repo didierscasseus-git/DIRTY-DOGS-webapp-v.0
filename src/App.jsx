@@ -136,7 +136,7 @@ function App() {
                 variants={itemVariant}
               >
                 <div className="plate-image-container">
-                  <img src={plate.image || '/ASSETS/tacos plate.png'} alt={plate.name} />
+                  <img src={plate.image || '/assets/tacos plate.png'} alt={plate.name} />
                 </div>
                 <div className="plate-info">
                    <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>{plate.name}</h3>
@@ -149,7 +149,7 @@ function App() {
 
         {/* Visit Us Section */}
         <section className="visit-section">
-          <div className="visit-banner" style={{ backgroundImage: "url('/ASSETS/Screenshot 2026-02-22 204246.png')" }}></div>
+          <div className="visit-banner" style={{ backgroundImage: "url('/assets/Screenshot 2026-02-22 204246.png')" }}></div>
           <div className="visit-details">
             <motion.h2 
               initial={{ opacity: 0, x: -20 }}
@@ -165,7 +165,7 @@ function App() {
                 <p>3685 Boul. Saint-Laurent,</p>
                 <p>Montreal, QC H2X 2V5</p>
 
-                <div className="map-placeholder" style={{ marginTop: '2rem', backgroundImage: "url('/ASSETS/map.png')", backgroundSize: 'cover' }}></div>
+                <div className="map-placeholder" style={{ marginTop: '2rem', backgroundImage: "url('/assets/map.png')", backgroundSize: 'cover' }}></div>
               </div>
               <div className="hours-container">
                 <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: '#fff' }}>HOURS</h3>
@@ -208,12 +208,12 @@ function App() {
           <div className="order-grid">
             <a href="https://www.ubereats.com/ca-fr/store/dirty-dogs-st-laurent/F2U9RYCPUUKp6rfh7nt8ZQ?gad_source=1&gad_campaignid=22675284634&gbraid=0AAAAA_oynLRrnzMKa0gaXyU4fjXDPKxXi&gclid=CjwKCAjwyMnNBhBNEiwA-Kcgu9GR2UsSnkZJLAmpnX69SH0qwXGUs_Zu2NB_CivXD-0VcdvH1QeF5xoCUc4QAvD_BwE" 
                target="_blank" rel="noopener noreferrer" className="order-card uber">
-              <img src="/ASSETS/Uber_Eats_2020_logo.svg.png" alt="Uber Eats" className="order-card-img" />
+              <img src="/assets/Uber_Eats_2020_logo.svg.png" alt="Uber Eats" className="order-card-img" />
             </a>
 
             <a href="https://www.doordash.com/en-CA/store/dirty-dogs-32295739/" 
                target="_blank" rel="noopener noreferrer" className="order-card doordash">
-              <img src="/ASSETS/doordash-logo-11609359542nd1g660y5t.webp" alt="DoorDash" className="order-card-img" />
+              <img src="/assets/doordash-logo-11609359542nd1g660y5t.webp" alt="DoorDash" className="order-card-img" />
             </a>
           </div>
 

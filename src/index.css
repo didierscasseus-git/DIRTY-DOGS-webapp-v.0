@@ -102,6 +102,34 @@ h3 {
   gap: 1rem;
 }
 
+@media (max-width: 1024px) {
+  .header-nav {
+    width: 100%;
+    top: 0;
+    border-radius: 0;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem 1.5rem;
+  }
+  
+  .nav-logo-small {
+    padding: 0;
+  }
+  
+  .nav-logo-small img {
+    filter: brightness(1); /* Keep white on dark background */
+    height: 40px;
+  }
+  
+  .nav-icon-btn {
+    width: 48px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.1);
+  }
+}
+
 @media (min-width: 1024px) {
   .header-nav {
     top: 0;
@@ -265,6 +293,20 @@ h3 {
   transform: scale(0.9);
 }
 
+.hero-cta-btn {
+  background: white;
+  color: black;
+  border: none;
+  font-family: var(--font-header);
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
 /* Iconic Plates Section */
 .plates-section {
   padding: 4rem 2rem;
@@ -381,6 +423,31 @@ h3 {
   margin-top: -4rem;
   position: relative;
   z-index: 10;
+}
+
+@media (max-width: 768px) {
+  .plates-section {
+    padding: 2rem 1.5rem;
+    margin-top: 0;
+  }
+  
+  .plates-section-title {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  .hero-cta-btn {
+    width: 100%;
+    padding: 1.2rem !important;
+    font-size: 1.2rem !important;
+  }
+  
+  .hero-cta-group {
+    width: 100%;
+    padding: 0 2rem;
+    gap: 1rem;
+  }
 }
 
 .plates-section-title {
