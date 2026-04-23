@@ -189,6 +189,7 @@ h3 {
 
 .nav-icon-btn svg {
   stroke: #000;
+  stroke-width: 2.5px; /* Thicker stroke for better visibility on white */
 }
 
 /* Light text/icons for dark backgrounds */
@@ -200,21 +201,29 @@ h3 {
 
 .header-nav.is-light .nav-icon-btn svg {
   stroke: #fff;
+  stroke-width: 2px;
 }
+
 
 
 .nav-icon-btn:hover {
-  background: rgba(255,255,255,0.25);
+  background: rgba(0,0,0,0.15); /* Darker hover for light backgrounds */
   transform: scale(1.1);
 }
+
+.header-nav.is-light .nav-icon-btn:hover {
+  background: rgba(255,255,255,0.25); /* Lighter hover for dark backgrounds */
+}
+
 
 .nav-logo-small img {
   height: 36px;
   width: auto;
   object-fit: contain;
-  filter: none; /* Dark logo by default */
+  filter: brightness(0); /* Absolute black for light backgrounds */
   transition: filter 0.3s ease;
 }
+
 
 .header-nav.is-light .nav-logo-small img {
   filter: brightness(0) invert(1); /* White logo for dark nav */
