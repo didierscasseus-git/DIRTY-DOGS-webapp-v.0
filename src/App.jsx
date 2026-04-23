@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Menu as MenuIcon, 
@@ -69,7 +71,16 @@ const itemVariant = {
 };
 
 function App() {
-  const [view, setView] = useState('home');
+  const location = useLocation();
+  const getInitialView = () => {
+    const path = location.pathname;
+    if (path === '/menu' || path === '/food') return 'food';
+    if (path === '/drinks' || path === '/drink') return 'drink';
+    if (path === '/order' || path === '/order-online') return 'order';
+    if (path === '/events') return 'events';
+    return 'home';
+  };
+  const [view, setView] = useState(getInitialView);
 
   const renderHome = () => {
     const iconicPlateIds = ['b1', 'b2', 'p5', 'p1'];
