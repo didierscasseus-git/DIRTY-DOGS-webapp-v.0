@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://eatdirtydogs.com/sitemap.xml
+Sitemap: https://dirtydogsmtl.com/sitemap.xml
+

@@ -32,20 +32,27 @@ import FoodItem from './components/FoodItem';
 import EventFeed from './components/EventFeed';
 
 const Nav = ({ setView, transparent, lightText }) => {
+  const navigate = (e, target) => {
+    e.preventDefault();
+    setView(target);
+    window.history.pushState({}, '', `/${target === 'home' ? '' : target}`);
+  };
+
   return (
     <nav className={`header-nav ${transparent ? 'is-transparent' : ''} ${lightText ? 'is-light' : ''}`}>
-      <div className="nav-logo-small" onClick={() => setView('home')} style={{ cursor: 'pointer' }}>
-        <img src="/logo_zoomed.png" alt="Logo" style={{ height: '30px' }} />
-      </div>
+      <a href="/" className="nav-logo-small" onClick={(e) => navigate(e, 'home')} style={{ cursor: 'pointer' }}>
+        <img src="/logo_zoomed.png" alt="Dirty Dogs MTL Home" style={{ height: '30px' }} />
+      </a>
       <div className="nav-actions">
-        <button onClick={() => setView('food')} className="nav-icon-btn" title="Menu"><Utensils size={20} /></button>
-        <button onClick={() => setView('drink')} className="nav-icon-btn" title="Drinks"><Beer size={20} /></button>
-        <button onClick={() => setView('order')} className="nav-icon-btn" title="Order"><ShoppingBag size={20} /></button>
-        <button onClick={() => setView('events')} className="nav-icon-btn" title="Events"><Calendar size={20} /></button>
+        <a href="/menu" onClick={(e) => navigate(e, 'food')} className="nav-icon-btn" title="Menu"><Utensils size={20} /></a>
+        <a href="/drinks" onClick={(e) => navigate(e, 'drink')} className="nav-icon-btn" title="Drinks"><Beer size={20} /></a>
+        <a href="/order" onClick={(e) => navigate(e, 'order')} className="nav-icon-btn" title="Order"><ShoppingBag size={20} /></a>
+        <a href="/events" onClick={(e) => navigate(e, 'events')} className="nav-icon-btn" title="Events"><Calendar size={20} /></a>
       </div>
     </nav>
   );
 };
+
 
 const springTransition = {
   type: "spring",
@@ -100,12 +107,15 @@ function App() {
 
         {/* Hero Section */}
         <section className="nostalgic-hero">
+          {/* Visually hidden H1 for SEO */}
+          <h1 className="sr-only">Dirty Dogs MTL - Original Street Food, Burgers & Poutine in Montreal</h1>
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ ...springTransition, delay: 0.2 }}
             className="hero-content glass-card"
           >
+
             {/* Title removed per user request */}
             {/* Subtitle removed per user request */}
             <div className="hero-cta-group">
@@ -217,7 +227,8 @@ function App() {
         <Nav setView={setView} lightText={false} />
 
         <div className="order-container">
-          <h2 className="order-title">ORDER ONLINE</h2>
+          <h1 className="order-title">ORDER ONLINE</h1>
+
           <p className="order-subtitle">PICK YOUR DELIVERY PLATFORM</p>
           
           <div className="order-grid">
@@ -277,7 +288,8 @@ function App() {
 
 
         <div className="view-header">
-          <h2 style={{ fontSize: 'clamp(4rem, 10vw, 10rem)', lineHeight: '0.8', margin: '0' }}>{isFood ? 'THE CANTEEN' : 'THE BAR'}</h2>
+          <h1 style={{ fontSize: 'clamp(4rem, 10vw, 10rem)', lineHeight: '0.8', margin: '0' }}>{isFood ? 'THE CANTEEN' : 'THE BAR'}</h1>
+
           <p style={{ fontFamily: 'var(--font-sub)', fontSize: '1.2rem', letterSpacing: '4px', marginTop: '1rem', color: '#888', textTransform: 'uppercase' }}>
             {!isFood && 'COCKTAILS & CRAFT BEERS'}
           </p>
