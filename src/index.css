@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;700&family=Oswald:wght@400;700&display=swap');
 
 :root {
-  /* Ultra-Premium iOS-inspired Palette */
+  /* Core Palette */
   --color-canvas: #000000;
   --color-surface: rgba(28, 28, 30, 0.6);
   --color-accent: #FFFFFF;
@@ -590,59 +590,63 @@ footer {
   align-items: flex-end;
 }
 
-/* Industrial Menu (Food) */
-.industrial-section {
-  max-width: 1000px;
-  margin: 0 auto 4rem auto;
-  padding: 0 1rem;
+/* Menu Layout (Food) */
+.menu-grid {
+  padding: 0 4rem 6rem 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
 }
 
-.industrial-category-title {
+.menu-section {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.menu-category-title {
+  font-family: var(--font-header);
   font-size: 3rem;
-  border-bottom: 2px solid white;
-  margin-bottom: 2rem;
-  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
-.industrial-item {
+.menu-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.menu-item-main {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-  margin-bottom: 1.5rem;
-  position: relative;
+  gap: 1rem;
 }
 
-.industrial-item-main {
-  flex: 1;
-  display: flex;
-  align-items: baseline;
-}
-
-.industrial-item-name {
+.menu-item-name {
   font-family: var(--font-header);
   font-size: 1.8rem;
-  white-space: nowrap;
-  letter-spacing: 1px;
+  color: white;
 }
 
-.industrial-item-dots {
+.menu-item-dots {
   flex: 1;
-  border-bottom: var(--border-dotted);
-  margin: 0 1rem;
+  border-bottom: 1px dotted rgba(255,255,255,0.2);
+  margin-bottom: 0.4rem;
 }
 
-.industrial-item-price {
+.menu-item-price {
   font-family: var(--font-header);
-  font-size: 1.8rem;
+  font-size: 1.6rem;
+  color: var(--color-action);
 }
 
-.industrial-item-description {
-  font-family: var(--font-body);
-  font-size: 0.9rem;
-  color: var(--color-text-dim);
-  margin-top: -0.5rem;
-  margin-bottom: 2rem;
-  max-width: 80%;
+.menu-item-description {
+  font-size: 1rem;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.5;
 }
 
 /* Drink Recipe Cards */

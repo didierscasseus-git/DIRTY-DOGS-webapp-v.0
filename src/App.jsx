@@ -260,10 +260,10 @@ function App() {
         </div>
 
         {isFood ? (
-          <div className="industrial-menu">
+          <div className="menu-grid">
             {sections.map(section => (
-              <div key={section} className="industrial-section">
-                <h3 className="industrial-category-title">{section}</h3>
+              <div key={section} className="menu-section">
+                <h3 className="menu-category-title">{section}</h3>
                 {items.filter(i => i.category === section).map(item => (
                   <FoodItem key={item.id} item={item} />
                 ))}
@@ -274,7 +274,7 @@ function App() {
           <div className="drinks-menu">
             {sections.map(section => (
               <div key={section} style={{ marginBottom: '6rem' }}>
-                <h3 className="industrial-category-title" style={{ marginLeft: '4rem', marginRight: '4rem' }}>{section}</h3>
+                <h3 className="menu-category-title" style={{ marginLeft: '4rem', marginRight: '4rem' }}>{section}</h3>
                 <div className="drinks-grid">
                   {items.filter(i => i.type === section).map(item => (
                     <DrinkCard key={item.id} item={item} />
