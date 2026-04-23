@@ -95,7 +95,8 @@ function App() {
         transition={{ duration: 0.6 }}
         className="home-container"
       >
-        <Nav setView={setView} />
+        <Nav setView={setView} lightText={true} />
+
 
         {/* Hero Section */}
         <section className="nostalgic-hero">
@@ -211,8 +212,10 @@ function App() {
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
         className="order-view"
+        style={{ background: '#fff', color: '#000' }}
       >
-        <Nav setView={setView} />
+        <Nav setView={setView} lightText={false} />
+
         <div className="order-container">
           <h2 className="order-title">ORDER ONLINE</h2>
           <p className="order-subtitle">PICK YOUR DELIVERY PLATFORM</p>
@@ -270,7 +273,8 @@ function App() {
         className="menu-view" 
         style={{ paddingTop: '8rem', background: '#000', color: '#fff', minHeight: '100vh' }}
       >
-        <Nav setView={setView} />
+        <Nav setView={setView} lightText={true} />
+
 
         <div className="view-header">
           <h2 style={{ fontSize: 'clamp(4rem, 10vw, 10rem)', lineHeight: '0.8', margin: '0' }}>{isFood ? 'THE CANTEEN' : 'THE BAR'}</h2>

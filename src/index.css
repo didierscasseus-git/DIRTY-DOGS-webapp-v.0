@@ -107,12 +107,18 @@ h3 {
     width: 100%;
     top: 0;
     border-radius: 0;
-    background: rgba(0, 0, 0, 0.75);
+    background: rgba(255, 255, 255, 0.8); /* Light background for mobile by default */
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     padding: 0.9rem 1.25rem;
   }
+
+  .header-nav.is-light {
+    background: rgba(0, 0, 0, 0.75); /* Dark background for mobile when is-light is active */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
 
   .nav-logo-small {
     padding: 0;
@@ -167,9 +173,9 @@ h3 {
 }
 
 .nav-icon-btn {
-  background: rgba(255,255,255,0.12);
-  border: 1px solid rgba(255,255,255,0.15);
-  color: white;
+  background: rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.1);
+  color: #000;
   cursor: pointer;
   padding: 0.5rem;
   display: flex;
@@ -182,8 +188,20 @@ h3 {
 }
 
 .nav-icon-btn svg {
-  stroke: white;
+  stroke: #000;
 }
+
+/* Light text/icons for dark backgrounds */
+.header-nav.is-light .nav-icon-btn {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #fff;
+}
+
+.header-nav.is-light .nav-icon-btn svg {
+  stroke: #fff;
+}
+
 
 .nav-icon-btn:hover {
   background: rgba(255,255,255,0.25);
@@ -194,11 +212,17 @@ h3 {
   height: 36px;
   width: auto;
   object-fit: contain;
-  filter: brightness(0) invert(1); /* White logo on dark nav */
+  filter: none; /* Dark logo by default */
+  transition: filter 0.3s ease;
 }
 
+.header-nav.is-light .nav-logo-small img {
+  filter: brightness(0) invert(1); /* White logo for dark nav */
+}
+
+
 .header-nav a {
-  color: white;
+  color: #000;
   text-decoration: none;
   font-family: var(--font-sub);
   font-size: 0.85rem;
@@ -207,6 +231,11 @@ h3 {
   font-weight: 700;
   transition: all 0.3s ease;
 }
+
+.header-nav.is-light a {
+  color: #fff;
+}
+
 
 .header-nav a:hover {
   color: var(--color-action);
@@ -1098,10 +1127,11 @@ footer {
   font-family: var(--font-sub);
   font-size: 1rem;
   letter-spacing: 4px;
-  color: rgba(255,255,255,0.5);
+  color: rgba(0,0,0,0.5); /* Darker subtitle for light BG */
   text-transform: uppercase;
   margin: 0 0 2rem;
 }
+
 
 .order-grid {
   display: flex;
@@ -1116,13 +1146,14 @@ footer {
   align-items: center;
   gap: 1.2rem;
   padding: 1.4rem 1.8rem;
-  border: 1px solid rgba(255,255,255,0.15);
+  border: 1px solid rgba(0,0,0,0.1);
   text-decoration: none;
-  color: #fff;
-  background: rgba(255,255,255,0.04);
+  color: #000;
+  background: rgba(0,0,0,0.03);
   transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
   border-radius: 4px;
 }
+
 
 .order-card:hover {
   background: rgba(255,255,255,0.1);
@@ -1146,8 +1177,9 @@ footer {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  filter: brightness(0) invert(1);
+  filter: none; /* No invert for logos on light BG */
 }
+
 
 .order-card-label {
   flex: 1;
