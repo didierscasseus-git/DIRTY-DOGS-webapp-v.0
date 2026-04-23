@@ -119,9 +119,9 @@ h3 {
   }
   
   .nav-logo-small img {
-    filter: brightness(1); /* Keep white on dark background */
-    height: 40px;
-  }
+  filter: brightness(0) invert(1);
+  height: 40px;
+}
   
   .nav-icon-btn {
     width: 48px;
@@ -1039,5 +1039,114 @@ footer {
   .nostalgic-hero {
     justify-content: center !important;
     background-position: center 20% !important;
+  }
+}
+
+/* ==============================
+   ORDER ONLINE PAGE
+============================== */
+.order-view {
+  min-height: 100vh;
+  background: #000;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.order-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10rem 2rem 6rem;
+  text-align: center;
+  gap: 1.5rem;
+}
+
+.order-title {
+  font-family: var(--font-header);
+  font-size: clamp(3.5rem, 10vw, 8rem);
+  line-height: 0.9;
+  margin: 0;
+  letter-spacing: -2px;
+}
+
+.order-subtitle {
+  font-family: var(--font-sub);
+  font-size: 1rem;
+  letter-spacing: 4px;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  margin: 0 0 2rem;
+}
+
+.order-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  width: 100%;
+  max-width: 480px;
+}
+
+.order-card {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 1.4rem 1.8rem;
+  border: 1px solid rgba(255,255,255,0.15);
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255,255,255,0.04);
+  transition: background 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
+  border-radius: 4px;
+}
+
+.order-card:hover {
+  background: rgba(255,255,255,0.1);
+  border-color: rgba(255,255,255,0.4);
+  transform: translateY(-2px);
+}
+
+.order-card.uber:hover { border-color: #06C167; }
+.order-card.doordash:hover { border-color: #FF3008; }
+
+.order-card-logo-wrap {
+  width: 80px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.order-card-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.order-card-label {
+  flex: 1;
+  text-align: left;
+  font-family: var(--font-sub);
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.order-card-arrow {
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+@media (max-width: 600px) {
+  .order-container {
+    padding: 8rem 1.5rem 4rem;
+  }
+  .order-grid {
+    max-width: 100%;
   }
 }

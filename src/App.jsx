@@ -36,9 +36,10 @@ const Nav = ({ setView, transparent, lightText }) => {
         <img src="/logo_zoomed.png" alt="Logo" style={{ height: '30px' }} />
       </div>
       <div className="nav-actions">
-        <button onClick={() => setView('food')} className="nav-icon-btn"><Utensils size={20} /></button>
-        <button onClick={() => setView('drink')} className="nav-icon-btn"><Beer size={20} /></button>
-        <button onClick={() => setView('events')} className="nav-icon-btn"><Calendar size={20} /></button>
+        <button onClick={() => setView('food')} className="nav-icon-btn" title="Menu"><Utensils size={20} /></button>
+        <button onClick={() => setView('drink')} className="nav-icon-btn" title="Drinks"><Beer size={20} /></button>
+        <button onClick={() => setView('order')} className="nav-icon-btn" title="Order"><ShoppingBag size={20} /></button>
+        <button onClick={() => setView('events')} className="nav-icon-btn" title="Events"><Calendar size={20} /></button>
       </div>
     </nav>
   );
@@ -202,23 +203,31 @@ function App() {
       >
         <Nav setView={setView} />
         <div className="order-container">
-          <h2 className="order-title">SECURE THE BAG</h2>
-          <p className="order-subtitle">CHOOSE YOUR DELIVERY PLATFORM</p>
+          <h2 className="order-title">ORDER ONLINE</h2>
+          <p className="order-subtitle">PICK YOUR DELIVERY PLATFORM</p>
           
           <div className="order-grid">
             <a href="https://www.ubereats.com/ca-fr/store/dirty-dogs-st-laurent/F2U9RYCPUUKp6rfh7nt8ZQ?gad_source=1&gad_campaignid=22675284634&gbraid=0AAAAA_oynLRrnzMKa0gaXyU4fjXDPKxXi&gclid=CjwKCAjwyMnNBhBNEiwA-Kcgu9GR2UsSnkZJLAmpnX69SH0qwXGUs_Zu2NB_CivXD-0VcdvH1QeF5xoCUc4QAvD_BwE" 
                target="_blank" rel="noopener noreferrer" className="order-card uber">
-              <img src="/assets/Uber_Eats_2020_logo.svg.png" alt="Uber Eats" className="order-card-img" />
+              <div className="order-card-logo-wrap">
+                <img src="/assets/uber_eats_logo.png" alt="Uber Eats" className="order-card-img" />
+              </div>
+              <span className="order-card-label">Order on Uber Eats</span>
+              <ArrowRight size={20} className="order-card-arrow" />
             </a>
 
             <a href="https://www.doordash.com/en-CA/store/dirty-dogs-32295739/" 
                target="_blank" rel="noopener noreferrer" className="order-card doordash">
-              <img src="/assets/doordash-logo-11609359542nd1g660y5t.webp" alt="DoorDash" className="order-card-img" />
+              <div className="order-card-logo-wrap">
+                <img src="/assets/doordash_logo.webp" alt="DoorDash" className="order-card-img" />
+              </div>
+              <span className="order-card-label">Order on DoorDash</span>
+              <ArrowRight size={20} className="order-card-arrow" />
             </a>
           </div>
 
           <button className="cta-button" style={{ marginTop: '4rem' }} onClick={() => setView('home')}>
-            BACK TO HOME
+            ← BACK TO HOME
           </button>
         </div>
 
