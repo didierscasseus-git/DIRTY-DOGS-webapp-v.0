@@ -231,15 +231,8 @@ h3 {
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
+  background-attachment: scroll; /* 'fixed' breaks on iOS — parallax on desktop only */
   background-image: url('/bg-hero.png');
-}
-
-@media (max-width: 768px) {
-  .nostalgic-hero {
-    background-image: url('/bg-hero-mobile.jpg');
-    background-attachment: scroll;
-    padding: 2rem;
-  }
 }
 
 @media (min-width: 1024px) {
