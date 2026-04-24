@@ -441,7 +441,7 @@ h3 {
   .hero-cta-group {
     width: 100%;
     padding: 0;
-    gap: 0;
+    gap: 1.5rem; /* Standardized gap for all buttons */
     background: none !important;
     -webkit-backdrop-filter: none !important;
     backdrop-filter: none !important;
@@ -451,8 +451,9 @@ h3 {
     flex-direction: column;
   }
 
+  /* Remove legacy specific margin */
   .hero-cta-group .hero-cta-btn:first-child {
-    margin-bottom: 2.5rem;
+    margin-bottom: 0;
   }
 
   /* Strip the glass card container on mobile so buttons aren't boxed in */
