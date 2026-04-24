@@ -2,6 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const DrinkCard = ({ item }) => {
+    const hasPitcher = !!item.pitcher_price;
     const isSangria = item.type === 'Sangrias';
     const isBeer = item.type === 'Beer';
     const ingredients = item.ingredients || [];
@@ -16,12 +17,20 @@ const DrinkCard = ({ item }) => {
             style={{ padding: '2rem', border: '1px solid var(--glass-border)' }}
         >
             <div className="drink-card-header" style={{ marginBottom: '2rem' }}>
-                <h3 className="drink-card-title" style={{ fontFamily: 'var(--font-header)', fontSize: '2.5rem', lineHeight: '1' }}>{item.name}{isSangria ? ' PITCHER' : ''}</h3>
+                <h3 className="drink-card-title" style={{ fontFamily: 'var(--font-header)', fontSize: '2.5rem', lineHeight: '1' }}>
+                    {item.name}
+                    {hasPitcher && !isSangria && <span style={{ fontSize: '1rem', verticalAlign: 'middle', marginLeft: '1rem', color: 'var(--color-action)' }}>+ PITCHER OPTION</span>}
+                    {isSangria && ' PITCHER'}
+                </h3>
                 <div className="drink-card-meta" style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem', color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>
-                    <span>{isSangria ? 'SERVES 5-6' : 'SERVES 1'}</span>
-                    <span style={{ color: 'var(--color-action)', fontWeight: 'bold' }}>${item.price}</span>
+                    <span>{(isSangria || hasPitcher) ? 'SERVES 1-6' : 'SERVES 1'}</span>
+                    <span style={{ color: 'var(--color-action)', fontWeight: 'bold' }}>
+                        ${item.price}
+                        {hasPitcher && ` / $${item.pitcher_price} PITCHER`}
+                    </span>
                 </div>
             </div>
+
 
             {!isBeer && ingredients.length > 0 && (
                 <div className="drink-card-section">

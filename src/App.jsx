@@ -18,6 +18,21 @@ import {
 import './index.css';
 import { menuData } from './data/menuData';
 
+const LoadedFriesIcon = ({ size = 20, color = "white", style = {} }) => (
+  <img 
+    src="/salchipapas_icon.png" 
+    alt="Salchipapas" 
+    style={{ 
+      width: size, 
+      height: size, 
+      objectFit: 'contain',
+      filter: color === 'white' ? 'invert(1)' : 'none',
+      display: 'block',
+      ...style
+    }} 
+  />
+);
+
 const SocialIcons = () => (
   <div style={{ display: 'flex', gap: '1rem' }}>
     <a href="#" className="social-icon-link" style={{ color: 'white', opacity: 0.6 }}><Globe size={20} /></a>
@@ -41,14 +56,16 @@ const Nav = ({ setView, transparent, lightText }) => {
   return (
     <nav className={`header-nav ${transparent ? 'is-transparent' : ''} ${lightText ? 'is-light' : ''}`}>
       <a href="/" className="nav-logo-small" onClick={(e) => navigate(e, 'home')} style={{ cursor: 'pointer' }}>
-        <img src="/logo_zoomed.png" alt="Dirty Dogs MTL Home" style={{ height: '30px' }} />
+        <img src="/logo.png" alt="Dirty Dogs MTL Home" style={{ height: '50px' }} />
       </a>
       <div className="nav-actions">
-        <a href="/menu" onClick={(e) => navigate(e, 'food')} className="nav-icon-btn" title="Menu"><Utensils size={20} /></a>
+        <a href="/menu" onClick={(e) => navigate(e, 'food')} className="nav-icon-btn" title="Canteen"><Utensils size={20} /></a>
+        <a href="/salchipapas" onClick={(e) => navigate(e, 'salchipapas')} className="nav-icon-btn" title="Salchipapas"><LoadedFriesIcon size={20} /></a>
         <a href="/drinks" onClick={(e) => navigate(e, 'drink')} className="nav-icon-btn" title="Drinks"><Beer size={20} /></a>
         <a href="/order" onClick={(e) => navigate(e, 'order')} className="nav-icon-btn" title="Order"><ShoppingBag size={20} /></a>
         <a href="/events" onClick={(e) => navigate(e, 'events')} className="nav-icon-btn" title="Events"><Calendar size={20} /></a>
       </div>
+
     </nav>
   );
 };
@@ -83,7 +100,9 @@ function App() {
     const path = location.pathname;
     if (path === '/menu' || path === '/food') return 'food';
     if (path === '/drinks' || path === '/drink') return 'drink';
+    if (path === '/salchipapas') return 'salchipapas';
     if (path === '/order' || path === '/order-online') return 'order';
+
     if (path === '/events') return 'events';
     return 'home';
   };
@@ -126,8 +145,28 @@ function App() {
                 style={{ borderRadius: '20px', fontSize: '1.2rem', padding: '1rem 2rem' }}
                 onClick={() => setView('food')}
               >
-                <ShoppingBag size={20} style={{ marginRight: '8px' }} />
-                ORDER NOW
+                <Utensils size={20} style={{ marginRight: '8px' }} />
+                CANTEEN
+              </motion.button>
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="hero-cta-btn" 
+                style={{ borderRadius: '20px', fontSize: '1.2rem', padding: '1rem 2rem' }}
+                onClick={() => setView('drink')}
+              >
+                <Beer size={20} style={{ marginRight: '8px' }} />
+                THE BAR
+              </motion.button>
+              <motion.button 
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="hero-cta-btn" 
+                style={{ borderRadius: '20px', fontSize: '1.2rem', padding: '1rem 2rem' }}
+                onClick={() => setView('salchipapas')}
+              >
+                <LoadedFriesIcon size={32} color="black" style={{ marginRight: '8px' }} />
+                SALCHIPAPAS
               </motion.button>
               <motion.button 
                 whileHover={{ scale: 1.05 }}
@@ -136,10 +175,11 @@ function App() {
                 style={{ borderRadius: '20px', fontSize: '1.2rem', padding: '1rem 2rem' }}
                 onClick={() => setView('events')}
               >
-                <Info size={20} style={{ marginRight: '8px' }} />
+                <Calendar size={20} style={{ marginRight: '8px' }} />
                 EVENTS
               </motion.button>
             </div>
+
           </motion.div>
         </section>
 
@@ -213,7 +253,104 @@ function App() {
     );
   };
 
+  const renderSalchipapas = () => {
+    const s = menuData.salchipapas;
+    return (
+      <motion.div 
+        key="salchipapas"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        className="menu-view" 
+        style={{ paddingTop: '8rem', background: '#000', color: '#fff', minHeight: '100vh' }}
+      >
+        <Nav setView={setView} lightText={true} />
+
+        <div className="view-header">
+          <h1 style={{ fontSize: 'clamp(4rem, 10vw, 10rem)', lineHeight: '0.8', margin: '0' }}>DIRTY SALCHIPAPAS</h1>
+          <p style={{ fontFamily: 'var(--font-sub)', fontSize: '1.2rem', letterSpacing: '4px', marginTop: '1rem', color: '#888', textTransform: 'uppercase' }}>
+            BUILD YOUR OWN MASTERPIECE
+          </p>
+        </div>
+
+        <div className="salchipapa-container" style={{ padding: '4rem' }}>
+          {/* Base Section */}
+          <div className="glass-card" style={{ padding: '3rem', marginBottom: '4rem', border: '2px solid var(--color-action)' }}>
+             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
+                <h2 style={{ fontFamily: 'var(--font-header)', fontSize: '3rem', margin: 0 }}>{s.classicBase.name}</h2>
+                <span style={{ fontFamily: 'var(--font-header)', fontSize: '2.5rem', color: 'var(--color-action)' }}>${s.classicBase.price}</span>
+             </div>
+             <p style={{ fontSize: '1.2rem', opacity: 0.7, marginTop: '1rem', maxWidth: '800px' }}>{s.classicBase.description}</p>
+          </div>
+
+          {/* Steps Grid */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+            {s.steps.map(step => (
+              <div key={step.step} className="glass-card" style={{ padding: '2rem', border: '1px solid rgba(255,255,255,0.1)' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1.5rem' }}>
+                  <span style={{ 
+                    background: 'var(--color-action)', 
+                    color: 'black', 
+                    width: '30px', 
+                    height: '30px', 
+                    borderRadius: '50%', 
+                    display: 'flex', 
+                    justifyContent: 'center', 
+                    alignItems: 'center',
+                    fontWeight: 'bold'
+                  }}>{step.step}</span>
+                  <h3 style={{ fontFamily: 'var(--font-header)', fontSize: '1.5rem', margin: 0 }}>{step.label}</h3>
+                </div>
+                
+                {step.includedNote && (
+                  <p style={{ fontSize: '0.8rem', color: 'var(--color-action)', marginBottom: '1rem', fontStyle: 'italic' }}>{step.includedNote}</p>
+                )}
+
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
+                  {step.options.map((opt, i) => (
+                    <div key={i} style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.95rem' }}>
+                      <span style={{ opacity: 0.9 }}>{opt.name}</span>
+                      {opt.price ? (
+                        <span style={{ color: 'var(--color-action)' }}>+${opt.price.toFixed(2)}</span>
+                      ) : (
+                        <span style={{ opacity: 0.4 }}>INCLUDED</span>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div style={{ textAlign: 'center', marginTop: '6rem' }}>
+             <button className="cta-button" onClick={() => setView('order')}>
+                GO TO ORDER PLATFORMS <ArrowRight size={20} style={{ marginLeft: '10px' }} />
+             </button>
+          </div>
+        </div>
+
+        <footer style={{ borderTop: '1px solid #333', padding: '4rem', background: '#000' }}>
+          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', width: '100%' }}>
+            <SocialIcons />
+            <div style={{ textAlign: 'right' }}>
+              <button
+                className="cta-button"
+                style={{ fontSize: '1rem', marginBottom: '2rem' }}
+                onClick={() => setView('home')}
+              >
+                BACK TO HOME
+              </button>
+              <p style={{ opacity: 0.5, fontSize: '0.8rem' }}>© {new Date().getFullYear()} Dirty Dogs Resto-Bar</p>
+            </div>
+          </div>
+        </footer>
+      </motion.div>
+    );
+  };
+
   const renderOrder = () => {
+
     return (
       <motion.div 
         key="order"
@@ -289,11 +426,11 @@ function App() {
 
         <div className="view-header">
           <h1 style={{ fontSize: 'clamp(4rem, 10vw, 10rem)', lineHeight: '0.8', margin: '0' }}>{isFood ? 'THE CANTEEN' : 'THE BAR'}</h1>
-
           <p style={{ fontFamily: 'var(--font-sub)', fontSize: '1.2rem', letterSpacing: '4px', marginTop: '1rem', color: '#888', textTransform: 'uppercase' }}>
-            {!isFood && 'COCKTAILS & CRAFT BEERS'}
+            {!isFood && 'COCKTAILS, MOCKTAILS & CRAFT BEERS'}
           </p>
         </div>
+
 
         {isFood ? (
           <div className="menu-grid">
@@ -345,8 +482,10 @@ function App() {
       <AnimatePresence mode="wait">
         {view === 'home' && renderHome()}
         {(view === 'food' || view === 'drink') && renderContent()}
+        {view === 'salchipapas' && renderSalchipapas()}
         {view === 'order' && renderOrder()}
         {view === 'events' && (
+
           <motion.div
             key="events"
             initial={{ opacity: 0 }}

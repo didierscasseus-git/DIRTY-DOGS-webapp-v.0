@@ -82,6 +82,15 @@ export const menuData = {
             ingredients: ['Malibu Rum', 'Vodka', 'Cranberry Juice', 'Splash Lime'],
             type: 'Cocktails'
         },
+        {
+            id: 'c7',
+            name: 'Classic Paloma',
+            price: 15,
+            description: 'The ultimate Mexican refresher: crisp tequila balanced with tart lime and sparkling grapefruit soda.',
+            ingredients: ['Tequila Blanco', 'Lime Juice', 'Grapefruit Soda', 'Salt Rim'],
+            type: 'Cocktails',
+            is_rush_friendly: true
+        },
 
         // Sangrias
         {
@@ -152,6 +161,43 @@ export const menuData = {
             ingredients: ['Lychee Liqueur', 'Vodka', 'Peach Schnapps'],
             type: 'Shots',
             is_rush_friendly: true
+        },
+        // Mocktails
+        {
+            id: 'm1',
+            name: '1',
+            price: 10,
+            description: 'Refreshing blend of raspberry, ginger, and mint house syrup with lemon juice and a silky foamer.',
+            ingredients: ['Raspberry', 'Ginger', 'Mint House Syrup', 'Lemon Juice', 'Foamer'],
+            type: 'Mocktails',
+            is_rush_friendly: true
+        },
+        {
+            id: 'm2',
+            name: '2',
+            price: 10,
+            description: 'Sophisticated fusion of Sureau flower and earl grey house syrup with peach nectar and lemon juice, topped with soda.',
+            ingredients: ['Sureau Flower', 'Earl Grey House Syrup', 'Peach Nectar', 'Lemon Juice', 'Soda'],
+            type: 'Mocktails',
+            is_rush_friendly: true
+        },
+        {
+            id: 'm3',
+            name: '3',
+            price: 10,
+            description: 'Tropical blend of vanilla passion fruit house syrup, pineapple juice, lemon juice, and passion fruit puree.',
+            ingredients: ['Vanilla Passion Fruit House Syrup', 'Pineapple Juice', 'Lemon Juice', 'Passion Fruit Puree'],
+            type: 'Mocktails',
+            is_rush_friendly: true
+        },
+        {
+            id: 'm4',
+            name: '4',
+            price: 10,
+            description: 'Refreshing botanical mix of fresh mint, crisp cucumbers, lime juice, and Sureau flower syrup, topped with ginger beer.',
+            ingredients: ['Mint', 'Cucumbers', 'Lime Juice', 'Sureau Flower Syrup', 'Ginger Beer'],
+            type: 'Mocktails',
+            is_rush_friendly: true
         }
     ],
     combos: [
@@ -161,5 +207,56 @@ export const menuData = {
             items_included: ['Tequila Shot', 'OG Poutine'],
             discount_price: 15
         }
-    ]
+    ],
+    salchipapas: {
+        classicBase: {
+            name: 'THE CLASSIC BASE',
+            price: 16.00,
+            description: 'Golden fresh fries topped with premium sliced beef sausages. Includes your choice of two fresh toppings and one signature sauce.'
+        },
+        steps: [
+            {
+                step: 1,
+                label: 'PICK YOUR CHEESE',
+                options: [
+                    { name: 'Fresh Cheese Curds', price: 5.00 },
+                    { name: '4-Cheese Sauce', price: 6.00 }
+                ]
+            },
+            {
+                step: 2,
+                label: 'PICK YOUR PROTEIN',
+                options: [
+                    { name: '8-Hour Slow-Cooked Pulled Pork', price: 6.00 },
+                    { name: '6-Hour Slow-Cooked Pulled Beef', price: 6.00 },
+                    { name: 'Homemade Fried Chicken', price: 6.00 },
+                    { name: 'Crispy Bacon', price: 4.00 },
+                    { name: 'Fried Egg', price: 3.00 }
+                ]
+            },
+            {
+                step: 3,
+                label: 'PICK YOUR VEGETABLES',
+                options: [
+                    { name: 'Avocado', price: 3.50 },
+                    { name: 'Corn', price: 2.00 },
+                    { name: 'Pickled Onions', price: null },
+                    { name: 'Pickles', price: null }
+                ]
+            },
+            {
+                step: 4,
+                label: 'PICK YOUR SAUCE',
+                includedNote: 'Included Toppings: Homemade pico de gallo, pickled onions.',
+                options: [
+                    { name: 'DD Secret Sauce', price: null },
+                    { name: "Mama's Secret Garlic Sauce", price: null },
+                    { name: 'Venezuelan Guasacaca', price: null },
+                    { name: 'Tangy Jalapeño Salsa', price: null },
+                    { name: 'Chipotle Mayo', price: null }
+                ]
+            }
+        ]
+    }
 };
+
