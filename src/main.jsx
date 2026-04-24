@@ -5,7 +5,7 @@ import './index.css'
 import App from './App.jsx'
 import VConsole from 'vconsole';
 
-if (import.meta.env.VITE_DEBUG_MODE === 'true') {
+if (import.meta.env.DEV && import.meta.env.VITE_DEBUG_MODE === 'true') {
   new VConsole();
 }
 
