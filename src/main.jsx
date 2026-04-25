@@ -3,11 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import App from './App.jsx'
-import VConsole from 'vconsole';
-
-if (import.meta.env.DEV && import.meta.env.VITE_DEBUG_MODE === 'true') {
-  new VConsole();
-}
+// vConsole removed
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {

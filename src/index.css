@@ -232,7 +232,14 @@ h3 {
   background-position: center top;
   background-repeat: no-repeat;
   background-attachment: scroll; /* 'fixed' breaks on iOS — parallax on desktop only */
-  background-image: url('/bg-hero.png');
+  background-image: url('/bg-hero.jpg');
+}
+
+@media (max-width: 768px) {
+  .nostalgic-hero {
+    padding: 12rem 1.5rem 4rem; /* Ensure buttons aren't cut off on small screens */
+    min-height: auto;
+  }
 }
 
 @media (min-width: 1024px) {
