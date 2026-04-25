@@ -231,15 +231,15 @@ h3 {
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
-  background-color: #000; /* Fallback for slow connections */
-  background-image: url('/bg-hero.webp');
+  background-color: #000;
+  background-image: url('/bg-hero.jpg');
 }
 
 @media (max-width: 768px) {
   .nostalgic-hero {
     padding: 8rem 1.5rem 4rem; 
-    min-height: 100vh; /* Force height to prevent collapse */
-    display: flex !important; /* Ensure visibility */
+    min-height: 100vh;
+    display: flex !important;
   }
 }
 
