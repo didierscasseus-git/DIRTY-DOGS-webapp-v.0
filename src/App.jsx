@@ -137,6 +137,18 @@ const itemVariant = {
 function App() {
   const [showLangPopup, setShowLangPopup] = useState(!localStorage.getItem('lang_pref'));
   const location = useLocation();
+  const getInitialView = () => {
+    const path = location.pathname;
+    if (path === '/menu' || path === '/food') return 'food';
+    if (path === '/drinks' || path === '/drink') return 'drink';
+    if (path === '/salchipapas') return 'salchipapas';
+    if (path === '/order' || path === '/order-online') return 'order';
+    if (path === '/gate') return 'gate';
+
+    if (path === '/events') return 'events';
+    return 'home';
+  };
+  const [view, setView] = useState(getInitialView);
 
   useEffect(() => {
     document.title = t('Dirty Dogs MTL | Best Hot Dogs, Poutines & Street Food in Montreal');
@@ -158,19 +170,6 @@ function App() {
       document.cookie = "googtrans=/en/en; domain=" + window.location.hostname + "; path=/;";
     }
   };
-
-  const getInitialView = () => {
-    const path = location.pathname;
-    if (path === '/menu' || path === '/food') return 'food';
-    if (path === '/drinks' || path === '/drink') return 'drink';
-    if (path === '/salchipapas') return 'salchipapas';
-    if (path === '/order' || path === '/order-online') return 'order';
-    if (path === '/gate') return 'gate';
-
-    if (path === '/events') return 'events';
-    return 'home';
-  };
-  const [view, setView] = useState(getInitialView);
 
   const renderGate = () => {
     return (
