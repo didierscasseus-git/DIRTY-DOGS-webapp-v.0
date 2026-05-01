@@ -1,9 +1,10 @@
 import React from 'react';
+import { t } from '../data/translations';
 
 const ComboCard = ({ combo }) => {
   return (
     <div className="combo-card">
-      <div className="combo-badge">COMBO SAVINGS</div>
+      <div className="combo-badge">{t('COMBO SAVINGS')}</div>
       <h3 className="combo-name">{combo.name}</h3>
       <div className="combo-items">
         {combo.items_included.map((item, index) => (
@@ -14,7 +15,7 @@ const ComboCard = ({ combo }) => {
       </div>
       <div className="combo-footer">
         <span className="combo-price">${combo.discount_price}</span>
-        <button className="cta-button combo-add-btn">ADD TO ORDER</button>
+        <button className="cta-button combo-add-btn">{t('ADD TO ORDER')}</button>
       </div>
 
       <style>{`

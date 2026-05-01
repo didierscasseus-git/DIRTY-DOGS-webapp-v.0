@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { t } from '../data/translations';
 
 const DrinkCard = ({ item }) => {
     const hasPitcher = !!item.pitcher_price;
@@ -19,14 +20,14 @@ const DrinkCard = ({ item }) => {
             <div className="drink-card-header" style={{ marginBottom: '2rem' }}>
                 <h3 className="drink-card-title" style={{ fontFamily: 'var(--font-header)', fontSize: '2.5rem', lineHeight: '1' }}>
                     {item.name}
-                    {hasPitcher && !isSangria && <span style={{ fontSize: '1rem', verticalAlign: 'middle', marginLeft: '1rem', color: 'var(--color-action)' }}>+ PITCHER OPTION</span>}
-                    {isSangria && ' PITCHER'}
+                    {hasPitcher && !isSangria && <span style={{ fontSize: '1rem', verticalAlign: 'middle', marginLeft: '1rem', color: 'var(--color-action)' }}>{t('+ PITCHER OPTION')}</span>}
+                    {isSangria && ` ${t('JUG')}`}
                 </h3>
                 <div className="drink-card-meta" style={{ display: 'flex', gap: '1rem', marginTop: '0.5rem', color: 'rgba(255,255,255,0.6)', fontSize: '0.9rem' }}>
-                    <span>{(isSangria || hasPitcher) ? 'SERVES 1-6' : 'SERVES 1'}</span>
+                    <span>{(isSangria || hasPitcher) ? t('SERVES 1-6') : t('SERVES 1')}</span>
                     <span style={{ color: 'var(--color-action)', fontWeight: 'bold' }}>
                         ${item.price}
-                        {hasPitcher && ` / $${item.pitcher_price} PITCHER`}
+                        {hasPitcher && ` / $${item.pitcher_price} ${t('JUG')}`}
                     </span>
                 </div>
             </div>
@@ -34,7 +35,7 @@ const DrinkCard = ({ item }) => {
 
             {!isBeer && ingredients.length > 0 && (
                 <div className="drink-card-section">
-                    <h4 className="drink-card-section-title" style={{ fontSize: '0.8rem', letterSpacing: '2px', color: 'rgba(255,255,255,0.4)' }}>INGREDIENTS</h4>
+                    <h4 className="drink-card-section-title" style={{ fontSize: '0.8rem', letterSpacing: '2px', color: 'rgba(255,255,255,0.4)' }}>{t('INGREDIENTS')}</h4>
                     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '1rem' }}>
                         {ingredients.map((ing, idx) => (
                             <span key={idx} className="ingredient-tag" style={{
@@ -53,7 +54,7 @@ const DrinkCard = ({ item }) => {
             )}
 
             <div className="drink-card-section" style={{ marginTop: '2rem' }}>
-                <h4 className="drink-card-section-title" style={{ fontSize: '0.8rem', letterSpacing: '2px', color: 'rgba(255,255,255,0.4)' }}>FLAVOR PROFILE</h4>
+                <h4 className="drink-card-section-title" style={{ fontSize: '0.8rem', letterSpacing: '2px', color: 'rgba(255,255,255,0.4)' }}>{t('FLAVOR PROFILE')}</h4>
                 <p className="flavor-profile" style={{ marginTop: '0.8rem', lineHeight: '1.6', fontSize: '1rem', color: 'rgba(255,255,255,0.8)' }}>{item.description}</p>
             </div>
         </motion.div>

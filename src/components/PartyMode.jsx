@@ -1,4 +1,5 @@
 import React from 'react';
+import { t } from '../data/translations';
 
 const PartyMode = () => {
     const events = [
@@ -15,7 +16,7 @@ const PartyMode = () => {
     return (
         <div className="party-container">
             <section className="events-feed">
-                <h2 className="massive-header">UPCOMING</h2>
+                <h2 className="massive-header">{t('UPCOMING')}</h2>
                 {events.map(event => (
                     <div key={event.id} className="event-card">
                         <div className="event-time flat-tag">{event.time}</div>
@@ -26,7 +27,7 @@ const PartyMode = () => {
             </section>
 
             <section className="arcade-scores">
-                <h2 className="massive-header">TOP SCORES</h2>
+                <h2 className="massive-header">{t('TOP SCORES')}</h2>
                 <div className="score-board">
                     {highScores.map((s, i) => (
                         <div key={i} className="score-row">

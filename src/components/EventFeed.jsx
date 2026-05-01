@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { eventData } from '../data/eventData';
+import { t } from '../data/translations';
 import '../index.css';
 
 const EventFeed = () => {
@@ -48,7 +49,7 @@ const EventFeed = () => {
             animate={{ opacity: 1, x: 0 }}
             className="newsletter-title"
           >
-            Events
+            {t('Events')}
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0, x: -20 }}
@@ -56,7 +57,7 @@ const EventFeed = () => {
             transition={{ delay: 0.1 }}
             className="newsletter-subtitle"
           >
-            What's happening at Dirty Dogs.
+            {t("What's happening at Dirty Dogs.")}
           </motion.p>
         </header>
 
@@ -79,20 +80,20 @@ const EventFeed = () => {
                   
                   <div className="newsletter-actions" style={{ marginTop: '2rem' }}>
                     <a href={event.link} className="hero-cta-btn" style={{ padding: '0.8rem 1.5rem', fontSize: '1rem', background: '#fff', color: '#000', textDecoration: 'none', display: 'inline-block' }} target={event.link !== '#' ? "_blank" : "_self"} rel="noreferrer">
-                      {event.isDynamicallyPast ? 'VIEW RECAP' : 'RSVP & TICKETS'}
+                      {event.isDynamicallyPast ? t('VIEW RECAP') : t('RSVP & TICKETS')}
                     </a>
                   </div>
                 </div>
 
                 <div className="newsletter-image-container">
                   <img src={event.image} alt={event.title} className="newsletter-image" loading="lazy" />
-                  {event.isDynamicallyPast && <div className="newsletter-badge" style={{ position: 'absolute', top: '20px', right: '20px', background: 'rgba(0,0,0,0.8)', padding: '0.5rem 1rem', borderRadius: '40px', fontSize: '0.8rem' }}>PAST EVENT</div>}
+                  {event.isDynamicallyPast && <div className="newsletter-badge" style={{ position: 'absolute', top: '20px', right: '20px', background: 'rgba(0,0,0,0.8)', padding: '0.5rem 1rem', borderRadius: '40px', fontSize: '0.8rem' }}>{t('PAST EVENT')}</div>}
                 </div>
               </motion.article>
             ))
           ) : (
             <div className="newsletter-empty">
-              <h2>NO EVENTS FOUND</h2>
+              <h2>{t('NO EVENTS FOUND')}</h2>
             </div>
           )}
         </main>

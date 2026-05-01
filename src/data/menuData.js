@@ -1,4 +1,6 @@
-export const menuData = {
+import { menuDataFr } from './menuDataFr';
+
+const menuDataEn = {
     food: [
         // Dirty Tacos (3 for $21. Served on fresh local artisan corn tortillas)
         { id: 't1', name: 'Tacos de Mama', price: 21, description: '3 Tacos. 6-hour slow-cooked pulled beef, homemade pico de gallo, pickled onions, mama’s secret garlic sauce. Served on fresh local artisan corn tortillas.', category: 'Dirty Tacos (3 for $21)', image: '/assets/tacos-plate.png' },
@@ -10,16 +12,17 @@ export const menuData = {
         { id: 'a2', name: 'Tequeño Cheese Sticks', price: 18, description: "Mama's secret recipe... crispy Venezuelan cheese sticks served with a special green Venezuelan guasacaca sauce.", category: 'Dirty Grinottes (Appetizers)' },
 
         // Dirty Burger & Dogs (Smashed with two patties and served with fresh fries)
-        { id: 'b1', name: 'La Burrata', price: 29, description: '5oz piece of burrata, BBQ sauce, cheddar, caramelized onions, pesto. Smashed with two patties and served with fresh fries.', category: 'Dirty Burger & Dogs', image: '/assets/buratta.png' },
+        { id: 'b1', name: 'La Burrata', price: 29, description: '5oz piece of burrata, BBQ sauce, cheddar, caramelized onions, pesto. Smashed with two patties and served with fresh fries.', category: 'Dirty Burger & Dogs', image: '/assets/buratta.png', isBurrata: true },
         { id: 'b2', name: 'Le Pig Mac', price: 20.50, description: '4-cheese mac n cheese, 8-hour slow-cooked pulled pork, cheddar cheese, crispy bacon, caramelized onions, BBQ sauce. Smashed with two patties and served with fresh fries.', category: 'Dirty Burger & Dogs', image: '/assets/mackattack.png', has_dog_option: true },
         { id: 'b3', name: 'Le Eastwood', price: 20, description: 'Cheddar, caramelized onions, crispy bacon, BBQ sauce. Smashed with two patties and served with fresh fries.', category: 'Dirty Burger & Dogs', has_dog_option: true },
         { id: 'b4', name: 'Le Hulk', price: 23.50, description: 'Cheddar, bacon, avocado, fried egg, DD secret sauce. Smashed with two patties and served with fresh fries.', category: 'Dirty Burger & Dogs', has_dog_option: true },
         { id: 'b5', name: 'Le Joker', price: 20, description: 'Cheddar cheese, DD secret sauce, ketchup, pickles. Smashed with two patties and served with fresh fries.', category: 'Dirty Burger & Dogs', has_dog_option: true },
         { id: 'b6', name: 'La Ronde', price: 22, description: 'Panko onion ring, cheddar cheese, chipotle mayo, 4-cheese sauce. Smashed with two patties and served with fresh fries.', category: 'Dirty Burger & Dogs', has_dog_option: true },
         { id: 'b7', name: 'Pollo Loco', price: 23.50, description: 'Homemade fried chicken, chipotle mayo, hot honey sauce, pickles, green onions. Smashed with two patties and served with fresh fries.', category: 'Dirty Burger & Dogs' },
+        { id: 'b8', name: 'Classic Hot Dog', price: 15, description: 'All-beef signature dog, steamed bun, mustard, ketchup, pickles, and onions. The OG street food experience.', category: 'Dirty Burger & Dogs' },
 
         // Dirty Poutines (All made with fresh fries, cheese curds, and gravy)
-        { id: 'p1', name: 'La Burrata', price: 28, combo_price: 22.50, description: '5oz piece of burrata, BBQ sauce, cheddar, caramelized onions, pesto. Made with fresh fries, cheese curds, and gravy.', category: 'Dirty Poutines', image: '/assets/plate2.png' },
+        { id: 'p1', name: 'La Burrata', price: 28, combo_price: 22.50, description: '5oz piece of burrata, BBQ sauce, cheddar, caramelized onions, pesto. Made with fresh fries, cheese curds, and gravy.', category: 'Dirty Poutines', image: '/assets/plate2.png', isBurrata: true },
         { id: 'p2', name: 'Le Pig Mac', price: 22, combo_price: 15, description: '4-cheese mac n cheese, 8-hour slow-cooked pulled pork, cheddar cheese, crispy bacon, caramelized onions, BBQ sauce. Made with fresh fries, cheese curds, and gravy.', category: 'Dirty Poutines' },
         { id: 'p3', name: 'Le Mac Attack', price: 21, combo_price: 13, description: '4-cheese mac n cheese, crispy bacon, green onions. Made with fresh fries, cheese curds, and gravy.', category: 'Dirty Poutines' },
         { id: 'p4', name: 'Le Eastwood', price: 21, combo_price: 13, description: 'Caramelized onions, crispy bacon, BBQ sauce. Made with fresh fries, cheese curds, and gravy.', category: 'Dirty Poutines' },
@@ -165,36 +168,36 @@ export const menuData = {
         // Mocktails
         {
             id: 'm1',
-            name: '1',
+            name: 'Rouge Riot',
             price: 10,
-            description: 'Refreshing blend of raspberry, ginger, and mint house syrup with lemon juice and a silky foamer.',
+            description: 'A bold, electric blend of tart raspberry and spicy ginger. Finished with fresh mint and a silky foam for a rebellious kick.',
             ingredients: ['Raspberry', 'Ginger', 'Mint House Syrup', 'Lemon Juice', 'Foamer'],
             type: 'Mocktails',
             is_rush_friendly: true
         },
         {
             id: 'm2',
-            name: '2',
+            name: 'Royal Tea',
             price: 10,
-            description: 'Sophisticated fusion of Sureau flower and earl grey house syrup with peach nectar and lemon juice, topped with soda.',
+            description: 'An elegant, high-roller fusion of Earl Grey tea and elderflower. Sweetened with peach nectar and brightened with lemon and soda.',
             ingredients: ['Sureau Flower', 'Earl Grey House Syrup', 'Peach Nectar', 'Lemon Juice', 'Soda'],
             type: 'Mocktails',
             is_rush_friendly: true
         },
         {
             id: 'm3',
-            name: '3',
+            name: 'Gold Digger',
             price: 10,
-            description: 'Tropical blend of vanilla passion fruit house syrup, pineapple juice, lemon juice, and passion fruit puree.',
+            description: 'Indulge in a tropical fortune of vanilla and passion fruit. A rich, golden blend of pineapple and pure passion fruit puree.',
             ingredients: ['Vanilla Passion Fruit House Syrup', 'Pineapple Juice', 'Lemon Juice', 'Passion Fruit Puree'],
             type: 'Mocktails',
             is_rush_friendly: true
         },
         {
             id: 'm4',
-            name: '4',
+            name: 'Midnight Mint',
             price: 10,
-            description: 'Refreshing botanical mix of fresh mint, crisp cucumbers, lime juice, and Sureau flower syrup, topped with ginger beer.',
+            description: 'The ultimate botanical escape. Crisp cucumber and fresh mint met with elderflower and a sharp ginger beer finish.',
             ingredients: ['Mint', 'Cucumbers', 'Lime Juice', 'Sureau Flower Syrup', 'Ginger Beer'],
             type: 'Mocktails',
             is_rush_friendly: true
@@ -260,3 +263,4 @@ export const menuData = {
     }
 };
 
+export const menuData = (typeof window !== 'undefined' && window.localStorage && window.localStorage.getItem('lang_pref') === 'fr') ? menuDataFr : menuDataEn;

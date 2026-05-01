@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import './index.css';
 import { menuData } from './data/menuData';
+import { t } from './data/translations';
 
 const LoadedFriesIcon = ({ size = 20, color = "white", style = {} }) => (
   <img 
@@ -46,7 +47,46 @@ import DrinkCard from './components/DrinkCard';
 import FoodItem from './components/FoodItem';
 import EventFeed from './components/EventFeed';
 
-const Nav = ({ setView, transparent, lightText }) => {
+const LanguagePopup = ({ onComplete }) => {
+  return (
+    <motion.div 
+      initial={{ opacity: 0 }} 
+      animate={{ opacity: 1 }} 
+      exit={{ opacity: 0 }}
+      className="language-popup-overlay"
+    >
+      <div className="language-popup-card glass-card">
+        <div style={{ marginBottom: '2rem' }}>
+          <Globe size={48} color="var(--color-action)" style={{ marginBottom: '1rem' }} />
+          <h2 style={{ fontFamily: 'var(--font-header)', fontSize: '2.5rem', margin: 0, letterSpacing: '-1px' }}>SELECT LANGUAGE</h2>
+          <h2 style={{ fontFamily: 'var(--font-header)', fontSize: '1.8rem', margin: 0, opacity: 0.6 }}>CHOISIR LA LANGUE</h2>
+        </div>
+        <div className="language-options">
+          <motion.button 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="cta-button" 
+            onClick={() => onComplete('en')} 
+            style={{ width: '100%', maxWidth: '280px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}
+          >
+            <span style={{ fontSize: '1.5rem' }}>🇺🇸</span> ENGLISH
+          </motion.button>
+          <motion.button 
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="cta-button" 
+            onClick={() => onComplete('fr')} 
+            style={{ width: '100%', maxWidth: '280px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '10px' }}
+          >
+            <span style={{ fontSize: '1.5rem' }}>🇨🇦</span> FRANÇAIS
+          </motion.button>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
+
+const Nav = ({ setView, transparent, lightText, onLangClick }) => {
   const navigate = (e, target) => {
     e.preventDefault();
     setView(target);
@@ -59,13 +99,13 @@ const Nav = ({ setView, transparent, lightText }) => {
         <img src="/logo.png" alt="Dirty Dogs MTL Home" style={{ height: '50px' }} />
       </a>
       <div className="nav-actions">
-        <a href="/menu" onClick={(e) => navigate(e, 'food')} className="nav-icon-btn" title="Canteen"><Utensils size={20} /></a>
-        <a href="/salchipapas" onClick={(e) => navigate(e, 'salchipapas')} className="nav-icon-btn" title="Salchipapas"><LoadedFriesIcon size={20} /></a>
-        <a href="/drinks" onClick={(e) => navigate(e, 'drink')} className="nav-icon-btn" title="Drinks"><Beer size={20} /></a>
-        <a href="/order" onClick={(e) => navigate(e, 'order')} className="nav-icon-btn" title="Order"><ShoppingBag size={20} /></a>
-        <a href="/events" onClick={(e) => navigate(e, 'events')} className="nav-icon-btn" title="Events"><Calendar size={20} /></a>
+        <a href="/menu" onClick={(e) => navigate(e, 'food')} className="nav-icon-btn" title={t('Canteen')}><Utensils size={20} /></a>
+        <a href="/salchipapas" onClick={(e) => navigate(e, 'salchipapas')} className="nav-icon-btn" title={t('Salchipapas')}><LoadedFriesIcon size={20} /></a>
+        <a href="/drinks" onClick={(e) => navigate(e, 'drink')} className="nav-icon-btn" title={t('Drinks')}><Beer size={20} /></a>
+        <a href="/order" onClick={(e) => navigate(e, 'order')} className="nav-icon-btn" title={t('Order')}><ShoppingBag size={20} /></a>
+        <a href="/events" onClick={(e) => navigate(e, 'events')} className="nav-icon-btn" title={t('Events')}><Calendar size={20} /></a>
+        <button onClick={onLangClick} className="nav-icon-btn" title={t('Switch Language')} style={{ background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}><Globe size={20} /></button>
       </div>
-
     </nav>
   );
 };
@@ -95,18 +135,96 @@ const itemVariant = {
 };
 
 function App() {
+  const [showLangPopup, setShowLangPopup] = useState(!localStorage.getItem('lang_pref'));
   const location = useLocation();
+
+  useEffect(() => {
+    document.title = t('Dirty Dogs MTL | Best Hot Dogs, Poutines & Street Food in Montreal');
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+      metaDesc.setAttribute('content', t("Dirty Dogs MTL is Montreal's legendary street food spot. Famous for gourmet hot dogs, indulgent poutines, and iconic street food plates. Visit us at 3685 Boul. Saint-Laurent."));
+    }
+  }, [view]);
+
+  const handleLanguageSelect = (lang) => {
+    localStorage.setItem('lang_pref', lang);
+    setShowLangPopup(false);
+    if (lang === 'fr') {
+      document.cookie = "googtrans=/en/fr; path=/;";
+      document.cookie = "googtrans=/en/fr; domain=" + window.location.hostname + "; path=/;";
+      window.location.reload();
+    } else {
+      document.cookie = "googtrans=/en/en; path=/;";
+      document.cookie = "googtrans=/en/en; domain=" + window.location.hostname + "; path=/;";
+    }
+  };
+
   const getInitialView = () => {
     const path = location.pathname;
     if (path === '/menu' || path === '/food') return 'food';
     if (path === '/drinks' || path === '/drink') return 'drink';
     if (path === '/salchipapas') return 'salchipapas';
     if (path === '/order' || path === '/order-online') return 'order';
+    if (path === '/gate') return 'gate';
 
     if (path === '/events') return 'events';
     return 'home';
   };
   const [view, setView] = useState(getInitialView);
+
+  const renderGate = () => {
+    return (
+      <motion.div 
+        key="gate"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        <section className="landing-gate">
+          <h1 className="sr-only">Dirty Dogs MTL - Choose Your Experience</h1>
+          <div className="gate-content">
+             <motion.img 
+               src="/logo.png" 
+               alt="Dirty Dogs MTL" 
+               className="gate-logo"
+               initial={{ opacity: 0, y: -20 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+             />
+             <motion.div 
+               className="gate-options"
+               variants={staggerContainer}
+               initial="hidden"
+               animate="show"
+             >
+                <motion.div variants={itemVariant} className="gate-card" onClick={() => setView('food')}>
+                   <Utensils size={48} />
+                   <div>
+                     <h2 className="gate-card-title">{t('THE CANTEEN')}</h2>
+                     <span className="gate-card-subtitle">{t('Original Street Food')}</span>
+                   </div>
+                </motion.div>
+                <motion.div variants={itemVariant} className="gate-card" onClick={() => setView('drink')}>
+                   <Beer size={48} />
+                   <div>
+                     <h2 className="gate-card-title">{t('THE BAR')}</h2>
+                     <span className="gate-card-subtitle">{t('Cocktails & Brews')}</span>
+                   </div>
+                </motion.div>
+                <motion.div variants={itemVariant} className="gate-card" onClick={() => setView('salchipapas')}>
+                   <LoadedFriesIcon size={48} color="white" />
+                   <div>
+                     <h2 className="gate-card-title">{t('SALCHIPAPAS')}</h2>
+                     <span className="gate-card-subtitle">{t('Build Your Masterpiece')}</span>
+                   </div>
+                </motion.div>
+             </motion.div>
+          </div>
+        </section>
+      </motion.div>
+    );
+  };
 
   const renderHome = () => {
     const iconicPlateIds = ['b1', 'b2', 'p5', 'p1'];
@@ -121,7 +239,7 @@ function App() {
         transition={{ duration: 0.6 }}
         className="home-container"
       >
-        <Nav setView={setView} lightText={true} />
+        <Nav setView={setView} lightText={true} onLangClick={() => setShowLangPopup(true)} />
 
 
         {/* Hero Section */}
@@ -135,8 +253,6 @@ function App() {
             className="hero-content glass-card"
           >
 
-            {/* Title removed per user request */}
-            {/* Subtitle removed per user request */}
             <div className="hero-cta-group">
               <motion.button 
                 whileHover={{ scale: 1.05 }}
@@ -146,7 +262,7 @@ function App() {
                 onClick={() => setView('food')}
               >
                 <Utensils size={20} style={{ marginRight: '8px' }} />
-                CANTEEN
+                {t('THE CANTEEN')}
               </motion.button>
               <motion.button 
                 whileHover={{ scale: 1.05 }}
@@ -156,7 +272,7 @@ function App() {
                 onClick={() => setView('drink')}
               >
                 <Beer size={20} style={{ marginRight: '8px' }} />
-                THE BAR
+                {t('THE BAR')}
               </motion.button>
               <motion.button 
                 whileHover={{ scale: 1.05 }}
@@ -166,7 +282,7 @@ function App() {
                 onClick={() => setView('salchipapas')}
               >
                 <LoadedFriesIcon size={32} color="black" style={{ marginRight: '8px' }} />
-                SALCHIPAPAS
+                {t('SALCHIPAPAS')}
               </motion.button>
               <motion.button 
                 whileHover={{ scale: 1.05 }}
@@ -176,7 +292,7 @@ function App() {
                 onClick={() => setView('events')}
               >
                 <Calendar size={20} style={{ marginRight: '8px' }} />
-                EVENTS
+                {t('EVENTS')}
               </motion.button>
             </div>
 
@@ -220,21 +336,21 @@ function App() {
               transition={springTransition}
               style={{ fontSize: '4rem' }}
             >
-              VISIT US AT THE CORNER
+              {t('VISIT US AT THE CORNER')}
             </motion.h2>
             <div className="visit-info-grid">
               <div className="address-container">
-                <p style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>Dirty Dogs Resto-Bar</p>
+                <p style={{ fontSize: '1.2rem', fontWeight: 'bold' }}>{t('Dirty Dogs Resto-Bar')}</p>
                 <p>3685 Boul. Saint-Laurent,</p>
                 <p>Montreal, QC H2X 2V5</p>
 
                 <div className="map-placeholder" style={{ marginTop: '2rem', backgroundImage: "url('/assets/map.png')", backgroundSize: 'cover' }}></div>
               </div>
               <div className="hours-container">
-                <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: '#fff' }}>HOURS</h3>
-                <p style={{ opacity: 0.8 }}>Mon – Wed: 12:00 PM - 1:00 AM</p>
-                <p style={{ opacity: 0.8 }}>Thu – Sat: 12:00 PM - 3:00 AM</p>
-                <p style={{ opacity: 0.8 }}>Sun: 12:00 PM - 1:00 AM</p>
+                <h3 style={{ fontSize: '1.5rem', marginBottom: '1rem', color: '#fff' }}>{t('HOURS')}</h3>
+                <p style={{ opacity: 0.8 }}>{t('Mon – Wed: 12:00 PM - 1:00 AM')}</p>
+                <p style={{ opacity: 0.8 }}>{t('Thu – Sat: 12:00 PM - 3:00 AM')}</p>
+                <p style={{ opacity: 0.8 }}>{t('Sun: 12:00 PM - 1:00 AM')}</p>
               </div>
             </div>
           </div>
@@ -265,12 +381,12 @@ function App() {
         className="menu-view" 
         style={{ paddingTop: '8rem', background: '#000', color: '#fff', minHeight: '100vh' }}
       >
-        <Nav setView={setView} lightText={true} />
+        <Nav setView={setView} lightText={true} onLangClick={() => setShowLangPopup(true)} />
 
         <div className="view-header">
-          <h1 style={{ fontSize: 'clamp(4rem, 10vw, 10rem)', lineHeight: '0.8', margin: '0' }}>DIRTY SALCHIPAPAS</h1>
+          <h1 style={{ fontSize: 'clamp(4rem, 10vw, 10rem)', lineHeight: '0.8', margin: '0' }}>{t('DIRTY SALCHIPAPAS')}</h1>
           <p style={{ fontFamily: 'var(--font-sub)', fontSize: '1.2rem', letterSpacing: '4px', marginTop: '1rem', color: '#888', textTransform: 'uppercase' }}>
-            BUILD YOUR OWN MASTERPIECE
+            {t('BUILD YOUR OWN MASTERPIECE')}
           </p>
         </div>
 
@@ -314,7 +430,7 @@ function App() {
                       {opt.price ? (
                         <span style={{ color: 'var(--color-action)' }}>+${opt.price.toFixed(2)}</span>
                       ) : (
-                        <span style={{ opacity: 0.4 }}>INCLUDED</span>
+                        <span style={{ opacity: 0.4 }}>{t('INCLUDED')}</span>
                       )}
                     </div>
                   ))}
@@ -325,7 +441,7 @@ function App() {
 
           <div style={{ textAlign: 'center', marginTop: '6rem' }}>
              <button className="cta-button" onClick={() => setView('order')}>
-                GO TO ORDER PLATFORMS <ArrowRight size={20} style={{ marginLeft: '10px' }} />
+                {t('GO TO ORDER PLATFORMS')} <ArrowRight size={20} style={{ marginLeft: '10px' }} />
              </button>
           </div>
         </div>
@@ -339,7 +455,7 @@ function App() {
                 style={{ fontSize: '1rem', marginBottom: '2rem' }}
                 onClick={() => setView('home')}
               >
-                BACK TO HOME
+                {t('BACK TO HOME')}
               </button>
               <p style={{ opacity: 0.5, fontSize: '0.8rem' }}>© {new Date().getFullYear()} Dirty Dogs Resto-Bar</p>
             </div>
@@ -364,9 +480,9 @@ function App() {
         <Nav setView={setView} lightText={false} />
 
         <div className="order-container">
-          <h1 className="order-title">ORDER ONLINE</h1>
+          <h1 className="order-title">{t('ORDER ONLINE')}</h1>
 
-          <p className="order-subtitle">PICK YOUR DELIVERY PLATFORM</p>
+          <p className="order-subtitle">{t('PICK YOUR DELIVERY PLATFORM')}</p>
           
           <div className="order-grid">
             <a href="https://www.ubereats.com/ca-fr/store/dirty-dogs-st-laurent/F2U9RYCPUUKp6rfh7nt8ZQ?gad_source=1&gad_campaignid=22675284634&gbraid=0AAAAA_oynLRrnzMKa0gaXyU4fjXDPKxXi&gclid=CjwKCAjwyMnNBhBNEiwA-Kcgu9GR2UsSnkZJLAmpnX69SH0qwXGUs_Zu2NB_CivXD-0VcdvH1QeF5xoCUc4QAvD_BwE" 
@@ -374,7 +490,7 @@ function App() {
               <div className="order-card-logo-wrap">
                 <img src="/assets/uber_eats_logo.png" alt="Uber Eats" className="order-card-img" />
               </div>
-              <span className="order-card-label">Order on Uber Eats</span>
+              <span className="order-card-label">{t('Order on Uber Eats')}</span>
               <ArrowRight size={20} className="order-card-arrow" />
             </a>
 
@@ -383,13 +499,13 @@ function App() {
               <div className="order-card-logo-wrap">
                 <img src="/assets/doordash_logo.webp" alt="DoorDash" className="order-card-img" />
               </div>
-              <span className="order-card-label">Order on DoorDash</span>
+              <span className="order-card-label">{t('Order on DoorDash')}</span>
               <ArrowRight size={20} className="order-card-arrow" />
             </a>
           </div>
 
           <button className="cta-button" style={{ marginTop: '4rem' }} onClick={() => setView('home')}>
-            ← BACK TO HOME
+            {t('← BACK TO HOME')}
           </button>
         </div>
 
@@ -405,7 +521,7 @@ function App() {
 
   const renderContent = () => {
     const isFood = view === 'food';
-    const items = isFood ? menuData.food : menuData.drinks;
+    const items = (isFood ? menuData.food : menuData.drinks).filter(i => !i.isBurrata);
 
     const sections = isFood
       ? Array.from(new Set(items.map(i => i.category)))
@@ -421,13 +537,13 @@ function App() {
         className="menu-view" 
         style={{ paddingTop: '8rem', background: '#000', color: '#fff', minHeight: '100vh' }}
       >
-        <Nav setView={setView} lightText={true} />
+        <Nav setView={setView} lightText={true} onLangClick={() => setShowLangPopup(true)} />
 
 
         <div className="view-header">
-          <h1 style={{ fontSize: 'clamp(4rem, 10vw, 10rem)', lineHeight: '0.8', margin: '0' }}>{isFood ? 'THE CANTEEN' : 'THE BAR'}</h1>
+          <h1 style={{ fontSize: 'clamp(4rem, 10vw, 10rem)', lineHeight: '0.8', margin: '0' }}>{isFood ? t('THE CANTEEN') : t('THE BAR')}</h1>
           <p style={{ fontFamily: 'var(--font-sub)', fontSize: '1.2rem', letterSpacing: '4px', marginTop: '1rem', color: '#888', textTransform: 'uppercase' }}>
-            {!isFood && 'COCKTAILS, MOCKTAILS & CRAFT BEERS'}
+            {!isFood && t('COCKTAILS, MOCKTAILS & CRAFT BEERS')}
           </p>
         </div>
 
@@ -467,7 +583,7 @@ function App() {
                 style={{ fontSize: '1rem', marginBottom: '2rem' }}
                 onClick={() => setView('home')}
               >
-                BACK TO HOME
+                {t('BACK TO HOME')}
               </button>
               <p style={{ opacity: 0.5, fontSize: '0.8rem' }}>© {new Date().getFullYear()} Dirty Dogs Resto-Bar</p>
             </div>
@@ -479,7 +595,11 @@ function App() {
 
   return (
     <div className="app-root">
+      <AnimatePresence>
+        {showLangPopup && <LanguagePopup onComplete={handleLanguageSelect} />}
+      </AnimatePresence>
       <AnimatePresence mode="wait">
+        {view === 'gate' && renderGate()}
         {view === 'home' && renderHome()}
         {(view === 'food' || view === 'drink') && renderContent()}
         {view === 'salchipapas' && renderSalchipapas()}
@@ -493,7 +613,7 @@ function App() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
           >
-            <Nav transparent={true} lightText={true} setView={setView} />
+            <Nav transparent={true} lightText={true} setView={setView} onLangClick={() => setShowLangPopup(true)} />
             <EventFeed />
           </motion.div>
         )}

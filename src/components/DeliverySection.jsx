@@ -1,4 +1,5 @@
 import React from 'react';
+import { t } from '../data/translations';
 
 const DeliverySection = () => {
   const partners = [
@@ -9,7 +10,7 @@ const DeliverySection = () => {
 
   return (
     <div className="delivery-section">
-      <h3 className="delivery-title">ORDER ONLINE</h3>
+      <h3 className="delivery-title">{t('ORDER ONLINE')}</h3>
       <div className="delivery-partners">
         {partners.map(partner => (
           <a

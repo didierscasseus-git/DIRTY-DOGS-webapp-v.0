@@ -1,4 +1,5 @@
 import React from 'react';
+import { t } from '../data/translations';
 import { motion } from 'framer-motion';
 import MenuCard from './MenuCard';
 
@@ -29,7 +30,7 @@ const ShelfView = ({ title, items }) => {
   return (
     <section className="shelf-section">
       <div className="shelf-header">
-        <h2 className="shelf-title">{title}</h2>
+        <h2 className="shelf-title">{t(title)}</h2>
         <div className="shelf-line"></div>
       </div>
 

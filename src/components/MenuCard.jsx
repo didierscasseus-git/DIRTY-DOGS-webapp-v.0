@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { t } from '../data/translations';
 
 const MenuCard = ({ item }) => {
   const [format, setFormat] = useState('burger');
@@ -15,14 +16,14 @@ const MenuCard = ({ item }) => {
         <h3 className="item-name">{displayName}</h3>
         <div className="price-stack">
           <span className="item-price">${item.price}</span>
-          {hasPitcher && <span className="alt-price">JUG: ${item.pitcher_price}</span>}
-          {hasBundle && <span className="alt-price">{item.bundle_qty} SHOTS: ${item.bundle_price}</span>}
+          {hasPitcher && <span className="alt-price">{t('JUG')}: ${item.pitcher_price}</span>}
+          {hasBundle && <span className="alt-price">{item.bundle_qty} {t('SHOTS')}: ${item.bundle_price}</span>}
         </div>
       </div>
 
       <div className="item-image-container">
         <img src={item.image || 'https://via.placeholder.com/300x200?text=DIRTY+DOGS'} alt={item.name} className="item-image" />
-        {item.is_greasy && <div className="sticker-tag greasy-tag">HANGOVER CURE</div>}
+        {item.is_greasy && <div className="sticker-tag greasy-tag">{t('HANGOVER CURE')}</div>}
       </div>
 
       <p className="item-description">{item.description}</p>
@@ -38,7 +39,7 @@ const MenuCard = ({ item }) => {
             }}
             onClick={() => setFormat('burger')}
           >
-            BURGER
+            {t('Burger')}
           </button>
           <button
             className="cta-button size-btn"
@@ -49,7 +50,7 @@ const MenuCard = ({ item }) => {
             }}
             onClick={() => setFormat('dog')}
           >
-            HOT DOG
+            {t('Hot Dog')}
           </button>
         </div>
       )}
